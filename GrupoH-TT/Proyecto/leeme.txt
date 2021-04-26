@@ -1,1 +1,8 @@
+Título propuesto: "Tácticas salvajes"
+Integrantes: Barros, Katerina; Barroso, Matías; Bernal, Ulises; Vargas, Nicolás
 
+Proyecto:
+
+El proyecto a desarrollar consiste en un juego táctico de unidades en una cuadricula que permite a los jugadores interactuar con su entorno y con unidades propias y enemigas.
+El juego se presenta mediante cartas que cuentan con distintas habilidades y turnos para llevar a cabo estas acciones.
+El lenguaje elegido para este proyecto es Python 3, el entorno es PyCharm
