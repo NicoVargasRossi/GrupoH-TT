@@ -3,6 +3,8 @@ Integrantes: Barros, Katerina; Barroso, Matías; Bernal, Ulises; Vargas, Nicolá
 
 Proyecto:
 
-El proyecto a desarrollar consiste en un juego táctico de unidades en una cuadrícula que permite a los jugadores interactuar con su entorno y con unidades propias y enemigas.
-El juego se presenta mediante cartas que cuentan con distintas habilidades y turnos para llevar a cabo estas acciones.
-El lenguaje elegido para este proyecto es Python 3, el entorno es PyCharm
+En este proyecto buscamos desarrollar un videojuego de tablero con modalidad táctica. La idea surge a raíz de diversas propuestas realizadas por los integrantes del grupo. Nuestro objetivo es desarrollar un juego de interacciones simples, duración corta y dinámicas sencillas. Esta propuesta se basa en distintas experiencias de juego de los participantes del grupo. Buscamos crear un juego balanceado y que consiga divertir a los jugadores sin pretender un aprendizaje exhaustivo de reglas o que requiera una cantidad de tiempo elevada.
+El juego consiste en un duelo entre dos facciones, representadas por ejércitos de animales, que “lucharán” por el control del territorio. Los jugadores utilizaran estos animales con habilidades únicas para construir estrategias, desarmar las tácticas del oponente y conseguir la victoria. Las habilidades de las unidades y las características del terreno representado en la cuadrícula agregan ventajas y desventajas que cada jugador deberá considerar para hacerse con el triunfo. En tácticas salvajes, los jugadores deberán considerar todas sus opciones, herramientas y recursos para aprovechar al máximo su turno.
+El juego consiste en dos contrincantes que disponen de un conjunto de cartas (que representan unidades y acciones) y un tablero. A través de los turnos sucesivos los jugadores podrán colocar y mover sus unidades en el tablero, realizar acciones, interactuar con piezas enemigas y acumular puntos. El juego termina cuando un jugador obtiene 50 puntos.
+
+Para desarrollar este programa utilizaremos Python 3, ya que consideramos que es un lenguaje flexible y muy productivo. Para acompañarnos durante el desarrollo, utilizaremos el entorno PyCharm y el repositorio Git.
