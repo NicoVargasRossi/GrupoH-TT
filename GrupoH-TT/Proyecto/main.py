@@ -106,3 +106,24 @@ def jugarCarta(carta):
         for event in pygame.event.get():
              if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
+                    posicion = pygame.mouse.get_pos()
+                    for c in Tablero.tablero:
+                        if c.r.collidepoint(posicion):
+                            if carta.seleccionada == True and c.Contenido is None:
+                                posicionDestino = (c.r.left + ((Tablero.casillaW / 2) - (Tablero.tokenW / 2)),
+                                                   c.r.top + ((Tablero.casillaH / 2) - (Tablero.tokenH / 2)))
+                                carta.token.Posicion = posicionDestino
+                                UnidadesEnJuego.append(carta.token)
+                                c.Contenido = carta.token
+                                carta.seleccionada = False
+                                posicionDestino = None
+                                jugador1.Mazo.append(carta)
+                                jugador1.Mano.remove(carta)
+                                main.cartaSeleccionada = False
+                                Esperar = False
+                                print(c.Contenido)
+
+             def MoverToken(casillaOrig):
+                 Esperar = True
+                 while Esperar:
+                     pos_Tok_X, pos_Tok_Y = casillaOrig.pos
