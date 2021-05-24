@@ -84,3 +84,25 @@ def mostrarBotones(pos):
 
                                     if btn.rect.collidepoint(posicion):
                                         if btn.text == "Mover":
+                                            c.Contenido.Seleccionado = True
+                                            main.tokenSeleccionado = True
+                                            MoverToken(c)
+                                            main.tokenSeleccionado = False
+                                            Esperar = False
+                                        elif btn.text == "Efecto":
+                                            Esperar = False
+                                            main.tokenSeleccionado = False
+                                            c.Contenido.Seleccionado = False
+                                        elif btn.text == "Cancelar":
+                                            Esperar = False
+                                            main.tokenSeleccionado = False
+                                            c.Contenido.Seleccionado = False
+                if c.Contenido is None:
+                     Esperar = False
+
+def jugarCarta(carta):
+     Esperar = True
+     while Esperar:
+        for event in pygame.event.get():
+             if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
