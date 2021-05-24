@@ -97,3 +97,41 @@ Casilla122 = Casilla("Normal",(12,2),None, (5,0), "No", (screenX/2) - (mapX/2) +
 Casilla123 = Casilla("Normal",(12,3),None, (5,0), "No", (screenX/2) - (mapX/2) + (casillaW * 12), (screenY/2) - (mapY/2) + (casillaH *3),casillaW,casillaH)
 Casilla124 = Casilla("Normal",(12,4),None, (0,0), "No", (screenX/2) - (mapX/2) + (casillaW * 12), (screenY/2) - (mapY/2) + (casillaH *4),casillaW,casillaH)
 Casilla125 = Casilla("Normal",(12,5),None, (0,0), "No", (screenX/2) - (mapX/2) + (casillaW * 12), (screenY/2) - (mapY/2) + (casillaH *5),casillaW,casillaH)
+
+r1 = pygame.Rect(((screenX/2) - (mapX/2) + mapX + 15 ),(screenY/2) - (mapY/2) + (carta_ManoH * 0),carta_ManoW,carta_ManoH)
+r2 = pygame.Rect(((screenX/2) - (mapX/2) + mapX + 15 ),(screenY/2) - (mapY/2) + (carta_ManoH * 1),carta_ManoW,carta_ManoH)
+r3 = pygame.Rect(((screenX/2) - (mapX/2) + mapX + 15 ),(screenY/2) - (mapY/2) + (carta_ManoH * 2),carta_ManoW,carta_ManoH)
+r4 = pygame.Rect(((screenX/2) - (mapX/2) + mapX + 15 ),(screenY/2) - (mapY/2) + (carta_ManoH * 3),carta_ManoW,carta_ManoH)
+r5 = pygame.Rect(((screenX/2) - (mapX/2) + mapX + 15 ),(screenY/2) - (mapY/2) + (carta_ManoH * 4),carta_ManoW,carta_ManoH)
+l1 = pygame.Rect(0,0,50,50)
+l2 = pygame.Rect(0,50,50,50)
+l3 = pygame.Rect(0,100,50,50)
+l4 = pygame.Rect(0,150,50,50)
+l5 = pygame.Rect(0,200,50,50)
+
+tablero = [Casilla00,Casilla01,Casilla02,Casilla03,Casilla04,Casilla05,
+           Casilla10,Casilla11,Casilla12,Casilla13,Casilla14,Casilla15,
+           Casilla20,Casilla21,Casilla22,Casilla23,Casilla24,Casilla25,
+           Casilla30,Casilla31,Casilla32,Casilla33,Casilla34,Casilla35,
+           Casilla40,Casilla41,Casilla42,Casilla43,Casilla44,Casilla45,
+           Casilla50,Casilla51,Casilla52,Casilla53,Casilla54,Casilla55,
+           Casilla60,Casilla61,Casilla62,Casilla63,Casilla64,Casilla65,
+           Casilla70,Casilla71,Casilla72,Casilla73,Casilla74,Casilla75,
+           Casilla80,Casilla81,Casilla82,Casilla83,Casilla84,Casilla85,
+           Casilla90,Casilla91,Casilla92,Casilla93,Casilla94,Casilla95,
+           Casilla100,Casilla101,Casilla102,Casilla103,Casilla104,Casilla105,
+           Casilla110,Casilla111,Casilla112,Casilla113,Casilla114,Casilla115,
+           Casilla120,Casilla121,Casilla122,Casilla123,Casilla124,Casilla125]
+
+tablero_Hash = {
+    (0,0): Casilla00, (1,0):  Casilla10, (2,0): Casilla20, (3,0): Casilla30, (4,0): Casilla40, (5,0): Casilla50, (6,0): Casilla60, (7,0): Casilla70, (8,0): Casilla80, (9,0): Casilla90, (10,0): Casilla100, (11,0): Casilla110, (12,0): Casilla120,
+    (0,1): Casilla01, (1,1):  Casilla11, (2,1): Casilla21, (3,1): Casilla31, (4,1): Casilla41, (5,1): Casilla51, (6,1): Casilla61, (7,1): Casilla71, (8,1): Casilla81, (9,1): Casilla91, (10,1): Casilla101, (11,1): Casilla111, (12,1): Casilla121,
+    (0,2): Casilla02, (1,2):  Casilla12, (2,2): Casilla22, (3,2): Casilla32, (4,2): Casilla42, (5,2): Casilla52, (6,2): Casilla62, (7,2): Casilla72, (8,2): Casilla82, (9,2): Casilla92, (10,2): Casilla102, (11,2): Casilla112, (12,2): Casilla122,
+    (0,3): Casilla03, (1,3):  Casilla13, (2,3): Casilla23, (3,3): Casilla33, (4,3): Casilla43, (5,3): Casilla53, (6,3): Casilla63, (7,3): Casilla73, (8,3): Casilla83, (9,3): Casilla93, (10,3): Casilla103, (11,3): Casilla113, (12,3): Casilla123,
+    (0,4): Casilla04, (1,4):  Casilla14, (2,4): Casilla24, (3,4): Casilla34, (4,4): Casilla44, (5,4): Casilla54, (6,4): Casilla64, (7,4): Casilla74, (8,4): Casilla84, (9,4): Casilla94, (10,4): Casilla104, (11,4): Casilla114, (12,4): Casilla124,
+    (0,5): Casilla05, (1,5):  Casilla15, (2,5): Casilla25, (3,5): Casilla35, (4,5): Casilla45, (5,5): Casilla55, (6,5): Casilla65, (7,5): Casilla75, (8,5): Casilla85, (9,5): Casilla95, (10,5): Casilla105, (11,5): Casilla115, (12,5): Casilla125,
+
+}
+
+ManoPl1 = [r1,r2,r3,r4,r5]
+ManoPl2 = [l1,l2,l3,l4,l5]
