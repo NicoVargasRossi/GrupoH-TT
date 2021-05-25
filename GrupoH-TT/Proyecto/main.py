@@ -86,7 +86,7 @@ def mostrarBotones(pos):
                                         if btn.text == "Mover":
                                             c.Contenido.Seleccionado = True
                                             main.tokenSeleccionado = True
-                                            MoverToken(c)
+                                            # MoverToken(c)
                                             main.tokenSeleccionado = False
                                             Esperar = False
                                         elif btn.text == "Efecto":
@@ -189,3 +189,21 @@ while running:
     for u in UnidadesEnJuego:
         if u.Posicion is not None:
          screen.blit(u.Icono,(u.Posicion))
+         for i in range(len(jugador1.Mano)):
+             jugador1.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
+             screen.blit(jugador1.Mano[i].imagen, Tablero.ManoPl1[i])
+         for event in pygame.event.get():
+             if event.type == pygame.QUIT:
+                 running = False
+             # Cartas
+             # Seleccionar Carta
+             if event.type == pygame.MOUSEBUTTONUP:
+                 if event.button == 3:
+                     posicion = pygame.mouse.get_pos()
+                     for c in jugador1.Mano:
+                         if c.posicionEnMano.collidepoint(posicion):
+                             if cartaSeleccionada == False:
+                                 if c.seleccionada == False:
+                                     c.seleccionada = True
+                                     cartaSeleccionada = True
+                             mostrarBotones(posicion)
