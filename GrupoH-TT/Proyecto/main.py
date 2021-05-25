@@ -171,3 +171,21 @@ def MoverToken(casillaOrig):
                                 esperar = False
 
                             esperar = False
+def requisitosMov(posicion,casilla, movimiento):
+    cdx, cdy = casilla
+    posx, posy = posicion.pos
+    if cdx <= posx - movimiento -1 and cdy <= posy - movimiento - 1 and cdx >= posx + movimiento + 1 and posy >= posy + movimiento +1 :
+        return True
+# Divido la anchura y altura de screen para asignarle el alto y ancho a la carta
+carta_Mostrada_W = int(screenX/5.5)
+carta_Mostrada_H = int(screenY/2.5)
+carta_Mostrada = pygame.image.load("Imagenes/ImgCartas/Carta_Negra.png")
+while running:
+    screen.fill((0, 0, 0))
+    screen.blit(map, ((screenX/2) - (mapX/2), (screenY/2) - (mapY/2)))
+    # Transformo escalando la carta para que sea responsive a la dimension de la pantalla
+    carta_Mostrada_Escalada = pygame.transform.scale(carta_Mostrada, (carta_Mostrada_W, carta_Mostrada_H))
+    screen.blit(carta_Mostrada_Escalada, (screenX - carta_Mostrada_W, screenY - carta_Mostrada_H))
+    for u in UnidadesEnJuego:
+        if u.Posicion is not None:
+         screen.blit(u.Icono,(u.Posicion))
