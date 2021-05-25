@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="279f1f0f-f844-4fbb-9416-da41787bd2a9" name="Default Changelist" comment="Avanzo en loop ppal">
+    <list default="true" id="279f1f0f-f844-4fbb-9416-da41787bd2a9" name="Default Changelist" comment="agrego contorno seleccion de botones &#10;solucionar boton cancelar una vez elegido jugar o mover">
+      <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/EjercitoSelva.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/EjercitoSelva.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/Tablero.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/Tablero.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +21,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="clase_button_y_main" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -107,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621957966246</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="agrego contorno seleccion de botones &#10;solucionar boton cancelar una vez elegido jugar o mover">
+      <created>1621965800334</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1621965800334</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -137,6 +146,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="clase button, y avanzo en el main, agrego carpeta img para tener png ordenados" />
     <MESSAGE value="Avanzo en loop ppal" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avanzo en loop ppal" />
+    <MESSAGE value="agrego contorno seleccion de botones &#10;solucionar boton cancelar una vez elegido jugar o mover" />
+    <option name="LAST_COMMIT_MESSAGE" value="agrego contorno seleccion de botones &#10;solucionar boton cancelar una vez elegido jugar o mover" />
   </component>
 </project>

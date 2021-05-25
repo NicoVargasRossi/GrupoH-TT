@@ -31,6 +31,7 @@ mainRect = pygame.Rect(0,0,screenX,screenY)
 mapX = Tablero.mapX
 mapY = Tablero.mapY
 map = pygame.image.load('Imagenes/map.png')
+map = pygame.transform.scale(map,(Tablero.mapX,Tablero.mapY))
 
 buttonW = 60
 buttonH = 25
@@ -201,7 +202,7 @@ carta_Mostrada_H = int(screenY/2.5)
 carta_Mostrada = pygame.image.load("Imagenes/ImgCartas/Carta_Negra.png")
 while running:
     screen.fill((0, 0, 0))
-    screen.blit(map, ((screenX/2) - (mapX/2), (screenY/2) - (mapY/2)))
+    screen.blit(map, ((screenX/4) - (mapX/4), (screenY/2) - (mapY/2)))
     # Transformo escalando la carta para que sea responsive a la dimension de la pantalla
     carta_Mostrada_Escalada = pygame.transform.scale(carta_Mostrada, (carta_Mostrada_W, carta_Mostrada_H))
     screen.blit(carta_Mostrada_Escalada, (screenX - carta_Mostrada_W, screenY - carta_Mostrada_H))

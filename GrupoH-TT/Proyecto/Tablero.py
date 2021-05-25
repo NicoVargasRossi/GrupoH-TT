@@ -7,14 +7,14 @@ screenX = 1024
 screenY = 600
 
 #El tablero puede cambiar de tamaño pero hay que ajustar el tamaño de las casillas segun sea la distribucion del nuevo tablero
-mapX = 650
-mapY = 300
+mapX = 455
+mapY = 210
 # Tamaño del Rect de las casillas
-casillaW = 50
-casillaH = 50
+casillaW = (mapX/13)
+casillaH = (mapY/6)
 # Tamaño del token
-tokenW = 32
-tokenH = 32
+tokenW = int(casillaW/1.5)
+tokenH = int(casillaH/1.5)
 # Tamaño del rect de las cartas en la mano
 carta_ManoW = 50
 carta_ManoH = 50
