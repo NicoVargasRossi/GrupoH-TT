@@ -150,7 +150,7 @@ def MoverToken(casillaOrig):
                                 posicionDestino = (c.r.left + ((Tablero.casillaW / 2) - (Tablero.tokenW / 2)),
                                         c.r.top + ((Tablero.casillaH / 2) - (Tablero.tokenH / 2)))
 
-                                if tokenUnidad.Seleccionado is True:
+                                if casillaOrig.Seleccionado is True:
                                     if main.tokenSeleccionado is True:
                                         casillaOrig.Contenido.Posicion = posicionDestino
                                         casillaOrig.Contenido.Seleccionado = False
@@ -207,3 +207,22 @@ while running:
                                      c.seleccionada = True
                                      cartaSeleccionada = True
                              mostrarBotones(posicion)
+                     # Token
+                     # Seleccionar Token
+             if event.type == pygame.MOUSEBUTTONDOWN:
+                     if event.button == 3:
+                         posicion = pygame.mouse.get_pos()
+                         for c in Tablero.tablero:
+                             if c.r.collidepoint(posicion):
+                                 if tokenSeleccionado == False:
+                                     if c.Contenido is not None:
+                                         c.Contenido.Seleccionado = True
+                                         tokenSeleccionado = True
+                                         mostrarBotones(posicion)
+                                     else:
+                                         print("coso")
+                         for c in jugador1.Mano:
+                             if c.posicionEnMano.collidepoint(posicion):
+                                 carta_Mostrada = carta_Img_Hash[c.nombre]
+                                 pygame.display.update()
+             pygame.display.update()
