@@ -123,7 +123,29 @@ def jugarCarta(carta):
                                 Esperar = False
                                 print(c.Contenido)
 
-             def MoverToken(casillaOrig):
-                 Esperar = True
-                 while Esperar:
-                     pos_Tok_X, pos_Tok_Y = casillaOrig.pos
+def MoverToken(casillaOrig):
+    Esperar = True
+    while Esperar:
+        pos_Tok_X, pos_Tok_Y = casillaOrig.pos
+        for i in range(casillaOrig.Contenido.Movimiento):
+            if pos_Tok_X + 1 + i < 13:
+                pygame.draw.rect(main.screen, (255, 233, 0),Tablero.tablero_Hash[(pos_Tok_X + 1 + i, pos_Tok_Y)].r, 4)
+                pygame.display.update()
+            if pos_Tok_Y + 1 + i < 6:
+                    pygame.draw.rect(main.screen, (255, 233, 0),Tablero.tablero_Hash[(pos_Tok_X, pos_Tok_Y + 1 + i)].r, 4)
+                    pygame.display.update()
+            if pos_Tok_X - 1 - i >= 0:
+                    pygame.draw.rect(main.screen, (255, 233, 0),Tablero.tablero_Hash[(pos_Tok_X - 1 - i, pos_Tok_Y)].r, 4)
+                    pygame.display.update()
+            if pos_Tok_Y - 1 - i >= 0:
+                    pygame.draw.rect(main.screen, (255, 233, 0),Tablero.tablero_Hash[(pos_Tok_X, pos_Tok_Y - 1 - i)].r, 4)
+                    pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    posicion = pygame.mouse.get_pos()
+                    for c in Tablero.tablero:
+                        if c.r.collidepoint(posicion):
+                            if c.Contenido is None:
+                                posicionDestino = (c.r.left + ((Tablero.casillaW / 2) - (Tablero.tokenW / 2)),
+                                        c.r.top + ((Tablero.casillaH / 2) - (Tablero.tokenH / 2)))
