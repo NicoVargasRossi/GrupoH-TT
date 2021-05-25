@@ -34,12 +34,12 @@ map = pygame.image.load('Imagenes/map.png')
 
 buttonW = 60
 buttonH = 25
-button_Token1 = button ((186,190,195), screenX-buttonW - 5, buttonH * 1, buttonW,buttonH, "Mover")
-button_Token2 = button ((186,190,195), screenX-buttonW - 5, buttonH * 2 + 5, buttonW,buttonH, "Efecto")
+button_Mover = button ((186, 190, 195), screenX - buttonW - 5, buttonH * 1, buttonW, buttonH, "Mover")
+button_Habilidad = button ((186, 190, 195), screenX - buttonW - 5, buttonH * 2 + 5, buttonW, buttonH, "Habilidad")
 button_Cancelar = button ((186,190,195), screenX-buttonW - 5, buttonH * 3 + 10,buttonW,buttonH, "Cancelar")
 button_JugarCarta = button ((186,190,195), screenX-buttonW - 5, buttonH * 1, buttonW,buttonH, "Jugar")
 button_Retirar = button ((186,190,195), screenX-buttonW - 5, buttonH * 4 + 15,buttonW,buttonH, "Retirar")
-botones = [button_Token1, button_Token2, button_Cancelar]
+botones = [button_Mover, button_Habilidad, button_Cancelar]
 botonesMano = [button_JugarCarta, button_Cancelar]
 cartaSeleccionada = False
 tokenSeleccionado = False
@@ -48,6 +48,20 @@ UnidadesEnJuego = []
 running = True
 jugador1 = Jugador(mazoSelva)
 #Metodos
+def paint_button (button):
+    if button == button_JugarCarta:
+        button_JugarCarta.draw(main.screen, (255, 244, 0))
+        pygame.display.update()
+    if button == button_Cancelar:
+        button_Cancelar.draw(main.screen, (255, 244, 0))
+        pygame.display.update()
+    if button == button_Mover:
+        button_Mover.draw(main.screen, (255, 244, 0))
+        pygame.display.update()
+    if button == button_Habilidad:
+        button_Habilidad.draw(main.screen, (255, 244, 0))
+        pygame.display.update()
+
 def mostrarBotones(pos):
     Esperar = True
     while Esperar:
@@ -64,6 +78,7 @@ def mostrarBotones(pos):
                             for btn in botonesMano:
                                 if btn.rect.collidepoint(posicion):
                                     if btn.text == "Jugar":
+                                        paint_button(button_JugarCarta)
                                         c.seleccionada = True
                                         jugarCarta(c)
                                         Esperar = False
@@ -84,16 +99,19 @@ def mostrarBotones(pos):
 
                                     if btn.rect.collidepoint(posicion):
                                         if btn.text == "Mover":
+                                            paint_button(button_Mover)
                                             c.Contenido.Seleccionado = True
                                             main.tokenSeleccionado = True
                                             MoverToken(c)
                                             main.tokenSeleccionado = False
                                             Esperar = False
                                         elif btn.text == "Efecto":
+                                            paint_button(button_Habilidad)
                                             Esperar = False
                                             main.tokenSeleccionado = False
                                             c.Contenido.Seleccionado = False
                                         elif btn.text == "Cancelar":
+                                            paint_button(button_Cancelar)
                                             Esperar = False
                                             main.tokenSeleccionado = False
                                             c.Contenido.Seleccionado = False
@@ -101,6 +119,7 @@ def mostrarBotones(pos):
                      Esperar = False
 
 def jugarCarta(carta):
+
      Esperar = True
      while Esperar:
         for event in pygame.event.get():
