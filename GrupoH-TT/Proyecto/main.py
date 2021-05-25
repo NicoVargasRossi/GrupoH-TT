@@ -86,7 +86,7 @@ def mostrarBotones(pos):
                                         if btn.text == "Mover":
                                             c.Contenido.Seleccionado = True
                                             main.tokenSeleccionado = True
-                                            # MoverToken(c)
+                                            MoverToken(c)
                                             main.tokenSeleccionado = False
                                             Esperar = False
                                         elif btn.text == "Efecto":
@@ -150,7 +150,7 @@ def MoverToken(casillaOrig):
                                 posicionDestino = (c.r.left + ((Tablero.casillaW / 2) - (Tablero.tokenW / 2)),
                                         c.r.top + ((Tablero.casillaH / 2) - (Tablero.tokenH / 2)))
 
-                                if casillaOrig.Seleccionado is True:
+                                if casillaOrig.Contenido.Seleccionado is True:
                                     if main.tokenSeleccionado is True:
                                         casillaOrig.Contenido.Posicion = posicionDestino
                                         casillaOrig.Contenido.Seleccionado = False
@@ -158,19 +158,19 @@ def MoverToken(casillaOrig):
                                         c.Contenido = casillaOrig.Contenido
                                         casillaOrig.Contenido = None
                                     elif main.tokenSeleccionado is False:
-                                        esperar = False
+                                        Esperar = False
                                         casillaOrig.Contenido.Seleccionado = False
                                         main.tokenSeleccionado = False
                                 elif casillaOrig.Contenido.Seleccionado is False:
-                                    esperar = False
+                                    Esperar = False
                                     main.tokenSeleccionado = False
 
                             elif c.Contenido is not None:
                                 casillaOrig.Contenido.Seleccionado = False
                                 main.tokenSeleccionado = False
-                                esperar = False
+                                Esperar = False
 
-                            esperar = False
+                            Esperar = False
 def requisitosMov(posicion,casilla, movimiento):
     cdx, cdy = casilla
     posx, posy = posicion.pos
@@ -189,10 +189,10 @@ while running:
     for u in UnidadesEnJuego:
         if u.Posicion is not None:
          screen.blit(u.Icono,(u.Posicion))
-         for i in range(len(jugador1.Mano)):
+    for i in range(len(jugador1.Mano)):
              jugador1.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
              screen.blit(jugador1.Mano[i].imagen, Tablero.ManoPl1[i])
-         for event in pygame.event.get():
+    for event in pygame.event.get():
              if event.type == pygame.QUIT:
                  running = False
              # Cartas
