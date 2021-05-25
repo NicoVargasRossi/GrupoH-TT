@@ -149,3 +149,25 @@ def MoverToken(casillaOrig):
                             if c.Contenido is None:
                                 posicionDestino = (c.r.left + ((Tablero.casillaW / 2) - (Tablero.tokenW / 2)),
                                         c.r.top + ((Tablero.casillaH / 2) - (Tablero.tokenH / 2)))
+
+                                if tokenUnidad.Seleccionado is True:
+                                    if main.tokenSeleccionado is True:
+                                        casillaOrig.Contenido.Posicion = posicionDestino
+                                        casillaOrig.Contenido.Seleccionado = False
+                                        main.tokenSeleccionado = False
+                                        c.Contenido = casillaOrig.Contenido
+                                        casillaOrig.Contenido = None
+                                    elif main.tokenSeleccionado is False:
+                                        esperar = False
+                                        casillaOrig.Contenido.Seleccionado = False
+                                        main.tokenSeleccionado = False
+                                elif casillaOrig.Contenido.Seleccionado is False:
+                                    esperar = False
+                                    main.tokenSeleccionado = False
+
+                            elif c.Contenido is not None:
+                                casillaOrig.Contenido.Seleccionado = False
+                                main.tokenSeleccionado = False
+                                esperar = False
+
+                            esperar = False
