@@ -1,6 +1,6 @@
 #Imports
 import pygame
-import pygame_menu
+# import pygame_menu
 
 import Carta
 import EjercitoSelva
@@ -17,7 +17,7 @@ from button import *
 pygame.init()
 
 FPS_CLOCK = pygame.time.Clock()
-FPS = 10
+FPS = 15
 
 pygame.display.set_caption("Tácticas Salvajes")
 icon = pygame.image.load('Imagenes/leo.png')
@@ -143,33 +143,63 @@ def jugarCarta(carta):
                                 print(c.Contenido)
 
 def MoverToken(casillaOrig):
-    Esperar = True
-    while Esperar:
+    esperar = True
+    casillasPermitidas = []
+    tokenUnidad = casillaOrig.Contenido
+    while esperar:
+        FPS_CLOCK.tick(FPS)
         pos_Tok_X, pos_Tok_Y = casillaOrig.pos
-        for i in range(casillaOrig.Contenido.Movimiento):
-            if pos_Tok_X + 1 + i < 13:
-                pygame.draw.rect(main.screen, (255, 233, 0),Tablero.tablero_Hash[(pos_Tok_X + 1 + i, pos_Tok_Y)].r, 4)
-                pygame.display.update()
-            if pos_Tok_Y + 1 + i < 6:
-                    pygame.draw.rect(main.screen, (255, 233, 0),Tablero.tablero_Hash[(pos_Tok_X, pos_Tok_Y + 1 + i)].r, 4)
+        for i in range(1, casillaOrig.Contenido.Movimiento + 1):
+            if pos_Tok_X + i <= 12:
+                casillaDestino = Tablero.tablero_Hash[(pos_Tok_X + i, pos_Tok_Y)]
+                if casillaDestino.Contenido is None and casillaDestino.TipoTerreno in tokenUnidad.TerrenoFavorable:
+                    pygame.draw.rect(main.screen, (255, 233, 0), Tablero.tablero_Hash[(pos_Tok_X + i, pos_Tok_Y)].r, 4)
+                    casillasPermitidas.append(casillaDestino)
                     pygame.display.update()
-            if pos_Tok_X - 1 - i >= 0:
-                    pygame.draw.rect(main.screen, (255, 233, 0),Tablero.tablero_Hash[(pos_Tok_X - 1 - i, pos_Tok_Y)].r, 4)
+                elif tokenUnidad.Nombre != "tucan":
+                    break
+
+        for i in range(1, casillaOrig.Contenido.Movimiento + 1):
+            if pos_Tok_Y + i <= 5:
+                casillaDestino = Tablero.tablero_Hash[(pos_Tok_X, pos_Tok_Y + i)]
+                if casillaDestino.Contenido is None and casillaDestino.TipoTerreno in tokenUnidad.TerrenoFavorable:
+                    pygame.draw.rect(main.screen, (255, 233, 0), Tablero.tablero_Hash[(pos_Tok_X, pos_Tok_Y + i)].r, 4)
+                    casillasPermitidas.append(casillaDestino)
                     pygame.display.update()
-            if pos_Tok_Y - 1 - i >= 0:
-                    pygame.draw.rect(main.screen, (255, 233, 0),Tablero.tablero_Hash[(pos_Tok_X, pos_Tok_Y - 1 - i)].r, 4)
+                elif tokenUnidad.Nombre != "tucan":
+                    break
+
+        for i in range(1, casillaOrig.Contenido.Movimiento + 1):
+            if pos_Tok_X - i >= 0:
+                casillaDestino = Tablero.tablero_Hash[(pos_Tok_X - i, pos_Tok_Y)]
+                if casillaDestino.Contenido is None and casillaDestino.TipoTerreno in tokenUnidad.TerrenoFavorable:
+                    pygame.draw.rect(main.screen, (255, 233, 0), Tablero.tablero_Hash[(pos_Tok_X - i, pos_Tok_Y)].r, 4)
+                    casillasPermitidas.append(casillaDestino)
                     pygame.display.update()
+                elif tokenUnidad.Nombre != "tucan":
+                    break
+
+        for i in range(1, casillaOrig.Contenido.Movimiento + 1):
+            if pos_Tok_Y - i >= 0:
+                casillaDestino = Tablero.tablero_Hash[(pos_Tok_X, pos_Tok_Y - i)]
+                if casillaDestino.Contenido is None and casillaDestino.TipoTerreno in tokenUnidad.TerrenoFavorable:
+                    pygame.draw.rect(main.screen, (255, 233, 0), Tablero.tablero_Hash[(pos_Tok_X, pos_Tok_Y - i)].r, 4)
+                    casillasPermitidas.append(casillaDestino)
+                    pygame.display.update()
+                elif tokenUnidad.Nombre != "tucan":
+                    break
+
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     posicion = pygame.mouse.get_pos()
                     for c in Tablero.tablero:
                         if c.r.collidepoint(posicion):
-                            if c.Contenido is None:
+                            if c in casillasPermitidas:
                                 posicionDestino = (c.r.left + ((Tablero.casillaW / 2) - (Tablero.tokenW / 2)),
-                                        c.r.top + ((Tablero.casillaH / 2) - (Tablero.tokenH / 2)))
+                                                   c.r.top + ((Tablero.casillaH / 2) - (Tablero.tokenH / 2)))
 
-                                if casillaOrig.Contenido.Seleccionado is True:
+                                if tokenUnidad.Seleccionado is True:
                                     if main.tokenSeleccionado is True:
                                         casillaOrig.Contenido.Posicion = posicionDestino
                                         casillaOrig.Contenido.Seleccionado = False
@@ -177,19 +207,21 @@ def MoverToken(casillaOrig):
                                         c.Contenido = casillaOrig.Contenido
                                         casillaOrig.Contenido = None
                                     elif main.tokenSeleccionado is False:
-                                        Esperar = False
+                                        esperar = False
                                         casillaOrig.Contenido.Seleccionado = False
                                         main.tokenSeleccionado = False
                                 elif casillaOrig.Contenido.Seleccionado is False:
-                                    Esperar = False
+                                    esperar = False
                                     main.tokenSeleccionado = False
 
                             elif c.Contenido is not None:
                                 casillaOrig.Contenido.Seleccionado = False
                                 main.tokenSeleccionado = False
-                                Esperar = False
+                                esperar = False
 
-                            Esperar = False
+                    esperar = False
+
+
 def requisitosMov(posicion,casilla, movimiento):
     cdx, cdy = casilla
     posx, posy = posicion.pos
@@ -245,3 +277,5 @@ while running:
                                  carta_Mostrada = carta_Img_Hash[c.nombre]
                                  pygame.display.update()
              pygame.display.update()
+
+exit()
