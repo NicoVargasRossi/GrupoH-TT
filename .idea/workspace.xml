@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="279f1f0f-f844-4fbb-9416-da41787bd2a9" name="Default Changelist" comment="agrego contorno seleccion de botones &#10;solucionar boton cancelar una vez elegido jugar o mover">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/EjercitoSelva.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/EjercitoSelva.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/Tablero.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/Tablero.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" afterDir="false" />
@@ -35,6 +36,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
