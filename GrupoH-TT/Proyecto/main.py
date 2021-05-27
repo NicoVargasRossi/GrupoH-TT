@@ -207,7 +207,7 @@ def MoverToken(casillaOrig):
                     pygame.draw.rect(main.screen, (255, 233, 0), Tablero.tablero_Hash[(pos_Tok_X + i, pos_Tok_Y)].r, 4)
                     casillasPermitidas.append(casillaDestino)
                     pygame.display.update()
-                elif tokenUnidad.Nombre != "tucan":
+                elif len(tokenUnidad.TerrenoFavorable) != 3:
                     break
 
         for i in range(1, casillaOrig.Contenido.Movimiento + 1):
@@ -217,7 +217,7 @@ def MoverToken(casillaOrig):
                     pygame.draw.rect(main.screen, (255, 233, 0), Tablero.tablero_Hash[(pos_Tok_X, pos_Tok_Y + i)].r, 4)
                     casillasPermitidas.append(casillaDestino)
                     pygame.display.update()
-                elif tokenUnidad.Nombre != "tucan":
+                elif len(tokenUnidad.TerrenoFavorable) != 3:
                     break
 
         for i in range(1, casillaOrig.Contenido.Movimiento + 1):
@@ -227,7 +227,7 @@ def MoverToken(casillaOrig):
                     pygame.draw.rect(main.screen, (255, 233, 0), Tablero.tablero_Hash[(pos_Tok_X - i, pos_Tok_Y)].r, 4)
                     casillasPermitidas.append(casillaDestino)
                     pygame.display.update()
-                elif tokenUnidad.Nombre != "tucan":
+                elif len(tokenUnidad.TerrenoFavorable) != 3:
                     break
 
         for i in range(1, casillaOrig.Contenido.Movimiento + 1):
@@ -237,7 +237,7 @@ def MoverToken(casillaOrig):
                     pygame.draw.rect(main.screen, (255, 233, 0), Tablero.tablero_Hash[(pos_Tok_X, pos_Tok_Y - i)].r, 4)
                     casillasPermitidas.append(casillaDestino)
                     pygame.display.update()
-                elif tokenUnidad.Nombre != "tucan":
+                elif len(tokenUnidad.TerrenoFavorable) != 3:
                     break
 
         for event in pygame.event.get():
