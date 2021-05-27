@@ -49,9 +49,10 @@ cartaSeleccionada = False
 tokenSeleccionado = False
 # Loop de juego
 UnidadesEnJuego = []
+
 running = True
-jugador1 = Jugador(1, mazoSelva)
-#jugador2 = Jugador(2, MazoPolar)
+jugador1 = Jugador(1, MazoPolar)
+jugador1.roboInicial()
 
 # Metodos
 def paint_button(button):
