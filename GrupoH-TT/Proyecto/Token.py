@@ -3,7 +3,7 @@ import pygame
 import Tablero
 
 class Token:
-
+    cartaAsignada = None
     def __init__(self, Nombre, Icono, Movimiento, Efecto, PuntajeMax, Terreno, Rect):
 
         self.Nombre = Nombre
