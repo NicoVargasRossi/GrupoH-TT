@@ -23,4 +23,9 @@ carta_Img_Hash = {
     "mono": imgCarta_Mono_compl,
     "tucan": imgCarta_Tucan_compl,
     "elefante": imgCarta_Elefante_compl,
+    "zorro": imgCarta_Elefante_compl,
+    "oso polar": imgCarta_Elefante_compl,
+    "gaviota": imgCarta_Elefante_compl,
+    "pingüino": imgCarta_Elefante_compl,
+    "reno": imgCarta_Elefante_compl,
 }

@@ -7,12 +7,14 @@ import EjercitoSelva
 import Tablero
 import Token
 import main
+import EjercitoPolar
 from Tablero import *
 from Casilla import *
 from EjercitoSelva import *
 from Jugador import *
 from Carta import *
 from button import *
+from EjercitoPolar import *
 
 # Inicialización y display
 pygame.init()
@@ -41,6 +43,7 @@ button_Cancelar = button((186, 190, 195), screenX - buttonW - 5, buttonH * 3 + 1
 button_JugarCarta = button((186, 190, 195), screenX - buttonW - 5, buttonH * 1, buttonW, buttonH, "Jugar")
 button_Retirar = button((186, 190, 195), screenX - buttonW - 5, buttonH * 4 + 15, buttonW, buttonH, "Retirar")
 botones = [button_Mover, button_Habilidad, button_Cancelar]
+botonesRetirar = [button_Mover, button_Habilidad, button_Cancelar, button_Retirar]
 botonesMano = [button_JugarCarta, button_Cancelar]
 cartaSeleccionada = False
 tokenSeleccionado = False
@@ -48,6 +51,7 @@ tokenSeleccionado = False
 UnidadesEnJuego = []
 running = True
 jugador1 = Jugador(1, mazoSelva)
+#jugador2 = Jugador(2, MazoPolar)
 
 # Metodos
 def paint_button(button):
@@ -63,8 +67,8 @@ def paint_button(button):
     if button == button_Habilidad:
         button_Habilidad.draw(main.screen, (255, 244, 0))
         pygame.display.update()
-
-
+    if button == button_Retirar:
+        button_Retirar.draw(main.screen, (255, 244, 0))
 def mostrarBotones(pos):
     Esperar = True
     while Esperar:
@@ -91,8 +95,12 @@ def mostrarBotones(pos):
         for c in Tablero.tablero:
             if c.r.collidepoint(pos):
                 if c.Contenido is not None:
-                    for b in botones:
-                        b.draw(main.screen)
+                    if c.pos[0] >= 11:
+                            for b in botonesRetirar:
+                                b.draw(main.screen)
+                    else:
+                        for b in botones:
+                            b.draw(main.screen)
                     pygame.display.update()
                     for event in pygame.event.get():
                         if event.type == pygame.MOUSEBUTTONUP:
@@ -118,26 +126,53 @@ def mostrarBotones(pos):
                                             Esperar = False
                                             main.tokenSeleccionado = False
                                             c.Contenido.Seleccionado = False
+                                for btn in botonesRetirar:
+                                    if c.pos[0] >= 11:
+                                        if btn.rect.collidepoint(posicion):
+                                            if btn.text == "Retirar":
+                                                paint_button(button_Retirar)
+                                                main.tokenSeleccionado = False
+                                                c.Contenido.Seleccionado = False
+                                                retirarToken(c)
+                                                c.Contenido = None
+                                                Esperar = False
                 if c.Contenido is None:
-                    Esperar = False
+                     Esperar = False
 
-
+def retirarToken(c):
+    if c.pos[0] >= 11:
+        UnidadesEnJuego.remove(c.Contenido)
+        main.jugador1.Mazo.append(c.Contenido.cartaAsignada)
+        c.Contenido = None
+        pygame.display.update()
+        print (UnidadesEnJuego)
+        print (len(jugador1.Mazo))
 def jugarCarta(carta):
-    Esperar = True
-    while Esperar:
+     Esperar = True
+     casillasPermitidas = []
+     while Esperar:
+        FPS_CLOCK.tick(FPS)
+        for c in Tablero.tablero:
+            if c.pos[0] == 11 or c.pos[0] == 12:
+                if c.TipoTerreno in carta.token.TerrenoFavorable:
+                    pygame.draw.rect(main.screen, (255, 233, 0),
+                                     c.r, 4)
+                    casillasPermitidas.append(c)
+        pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     posicion = pygame.mouse.get_pos()
                     for c in Tablero.tablero:
                         if c.r.collidepoint(posicion):
-                            if carta.seleccionada and c.Contenido is None:
-                                posicionDestino =  (c.r.left + ((Tablero.casillaW / 2) - (Tablero.tokenW / 2)),
+                            if carta.seleccionada and c.Contenido is None and c in casillasPermitidas:
+                                posicionDestino = (c.r.left + ((Tablero.casillaW / 2) - (Tablero.tokenW / 2)),
                                                    c.r.top + ((Tablero.casillaH / 2) - (Tablero.tokenH / 2)))
                                 carta.token.Posicion = posicionDestino
                                 UnidadesEnJuego.append(carta.token)
                                 c.Contenido = carta.token
                                 carta.seleccionada = False
+                                c.Contenido.cartaAsignada = carta
                                 jugador1.Mano.remove(carta)
                                 main.cartaSeleccionada = False
                                 Esperar = False
@@ -151,10 +186,10 @@ def RobarCarta(jugador):
         carta = jugador.Mazo.pop(n)
         jugador.Mano.append(carta)
         if jugador.id == 1:
-            for i in range(len(jugador1.Mano)):
+            for i in range(len(jugador.Mano)):
                 jugador.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
         else:
-            for i in range(len(jugador1.Mano)):
+            for i in range(len(jugador.Mano)):
                 jugador.Mano[i].posicionEnMano = Tablero.ManoPl2[i]
 
 def MoverToken(casillaOrig):
@@ -236,12 +271,6 @@ def MoverToken(casillaOrig):
 
                     esperar = False
 
-
-def requisitosMov(posicion, casilla, movimiento):
-    cdx, cdy = casilla
-    posx, posy = posicion.pos
-    if cdx <= posx - movimiento - 1 and cdy <= posy - movimiento - 1 and cdx >= posx + movimiento + 1 and posy >= posy + movimiento + 1:
-        return True
 
 
 # Divido la anchura y altura de screen para asignarle el alto y ancho a la carta

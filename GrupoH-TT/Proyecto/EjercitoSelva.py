@@ -1,3 +1,5 @@
+import copy
+
 import pygame
 
 import Token

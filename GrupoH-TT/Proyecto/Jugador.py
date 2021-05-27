@@ -35,4 +35,4 @@ class Jugador:
     def __init__(self, id, MazoInicial):
         self.id = id
         self.Mazo = MazoInicial
-        self.ManoInicial = Jugador.roboInicial(self)
+        self.Mano = self.roboInicial()
