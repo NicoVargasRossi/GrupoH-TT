@@ -5,6 +5,7 @@ import Token
 from Token import *
 from Carta import *
 
+
 #Tokens
 IconoLeon = pygame.image.load("Imagenes/LogosAnimales/lion.png")
 leon1 = Token.Token("leon", IconoLeon, 3 , "Rugido", 10, ["Normal"], None)
@@ -72,7 +73,14 @@ celefante1 = Carta("elefante", imgElefante, elefante1, efectoCElefante, DUElefan
 celefante2 = Carta("elefante", imgElefante, elefante2, efectoCElefante, DUElefante)
 celefante3 = Carta("elefante", imgElefante, elefante3, efectoCElefante, DUElefante)
 celefante4 = Carta("elefante", imgElefante, elefante4, efectoCElefante, DUElefante)
+
 mazoSelva = [cleon1,cleon2,cleon3,cleon4,
+             celefante1,celefante2,celefante3,celefante4,
+             cmono1,cmono2,cmono3,cmono4,
+             ctucan1,ctucan2,ctucan3,ctucan4,
+             ccebra1,ccebra2,ccebra3,ccebra4]
+
+mazoSelva2 = [cleon1,cleon2,cleon3,cleon4,
              celefante1,celefante2,celefante3,celefante4,
              cmono1,cmono2,cmono3,cmono4,
              ctucan1,ctucan2,ctucan3,ctucan4,

@@ -11,22 +11,28 @@ class Jugador:
 
     PuntosDeAccion = 3
     PuntosDeVictoria = 0
-    UnidadesJugador = [Token.Token]
-    Mano = [i for i in range(5)]
-    Mazo = [i for i in range(20)]
+    UnidadesJugador = []
+    Mano = []
+    Mazo = []
 
-    def roboInicial(self, mazoJugador):
-        for i in range(len(self.Mano)):
+    def roboInicial(self):
+        for i in range(5):
             n = random.randint(0,19-i)
-            self.Mano[i] = self.Mazo[n]
-            self.Mazo.pop(n)
+            self.Mano.append(self.Mazo.pop(n))
         return self.Mano
 
+    # def robaCarta(self):
+    #     if len(self.Mano) < 5:
+    #         n = random.randint(0, 9)
+    #         self.Mano.append(self.Mazo[n])
+    #         self.Mazo.pop(n)
+#
     def jugarCartas(self, Carta, Casilla):
         Casilla.Contenido = Carta.token
         self.UnidadesJugador.append(Carta.token)
 
 
-    def __init__(self, MazoInicial):
+    def __init__(self, id, MazoInicial):
+        self.id = id
         self.Mazo = MazoInicial
-        self.ManoInicial = Jugador.roboInicial(self, MazoInicial)
+        self.ManoInicial = Jugador.roboInicial(self)

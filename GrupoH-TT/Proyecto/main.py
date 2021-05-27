@@ -1,4 +1,4 @@
-#Imports
+# Imports
 import pygame
 # import pygame_menu
 
@@ -13,7 +13,8 @@ from EjercitoSelva import *
 from Jugador import *
 from Carta import *
 from button import *
-#Inicialización y display
+
+# Inicialización y display
 pygame.init()
 
 FPS_CLOCK = pygame.time.Clock()
@@ -27,28 +28,29 @@ pygame.display.set_icon(icon)
 screenX = Tablero.screenX
 screenY = Tablero.screenY
 screen = pygame.display.set_mode((screenX, screenY))
-mainRect = pygame.Rect(0,0,screenX,screenY)
+mainRect = pygame.Rect(0, 0, screenX, screenY)
 mapX = Tablero.mapX
 mapY = Tablero.mapY
 map = pygame.image.load('Imagenes/map.png')
 
 buttonW = 60
 buttonH = 25
-button_Mover = button ((186, 190, 195), screenX - buttonW - 5, buttonH * 1, buttonW, buttonH, "Mover")
-button_Habilidad = button ((186, 190, 195), screenX - buttonW - 5, buttonH * 2 + 5, buttonW, buttonH, "Habilidad")
-button_Cancelar = button ((186,190,195), screenX-buttonW - 5, buttonH * 3 + 10,buttonW,buttonH, "Cancelar")
-button_JugarCarta = button ((186,190,195), screenX-buttonW - 5, buttonH * 1, buttonW,buttonH, "Jugar")
-button_Retirar = button ((186,190,195), screenX-buttonW - 5, buttonH * 4 + 15,buttonW,buttonH, "Retirar")
+button_Mover = button((186, 190, 195), screenX - buttonW - 5, buttonH * 1, buttonW, buttonH, "Mover")
+button_Habilidad = button((186, 190, 195), screenX - buttonW - 5, buttonH * 2 + 5, buttonW, buttonH, "Habilidad")
+button_Cancelar = button((186, 190, 195), screenX - buttonW - 5, buttonH * 3 + 10, buttonW, buttonH, "Cancelar")
+button_JugarCarta = button((186, 190, 195), screenX - buttonW - 5, buttonH * 1, buttonW, buttonH, "Jugar")
+button_Retirar = button((186, 190, 195), screenX - buttonW - 5, buttonH * 4 + 15, buttonW, buttonH, "Retirar")
 botones = [button_Mover, button_Habilidad, button_Cancelar]
 botonesMano = [button_JugarCarta, button_Cancelar]
 cartaSeleccionada = False
 tokenSeleccionado = False
-#Loop de juego
+# Loop de juego
 UnidadesEnJuego = []
 running = True
-jugador1 = Jugador(mazoSelva)
-#Metodos
-def paint_button (button):
+jugador1 = Jugador(1, mazoSelva)
+
+# Metodos
+def paint_button(button):
     if button == button_JugarCarta:
         button_JugarCarta.draw(main.screen, (255, 244, 0))
         pygame.display.update()
@@ -61,6 +63,7 @@ def paint_button (button):
     if button == button_Habilidad:
         button_Habilidad.draw(main.screen, (255, 244, 0))
         pygame.display.update()
+
 
 def mostrarBotones(pos):
     Esperar = True
@@ -116,31 +119,43 @@ def mostrarBotones(pos):
                                             main.tokenSeleccionado = False
                                             c.Contenido.Seleccionado = False
                 if c.Contenido is None:
-                     Esperar = False
+                    Esperar = False
+
 
 def jugarCarta(carta):
-
-     Esperar = True
-     while Esperar:
+    Esperar = True
+    while Esperar:
         for event in pygame.event.get():
-             if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     posicion = pygame.mouse.get_pos()
                     for c in Tablero.tablero:
                         if c.r.collidepoint(posicion):
-                            if carta.seleccionada == True and c.Contenido is None:
-                                posicionDestino = (c.r.left + ((Tablero.casillaW / 2) - (Tablero.tokenW / 2)),
+                            if carta.seleccionada and c.Contenido is None:
+                                posicionDestino =  (c.r.left + ((Tablero.casillaW / 2) - (Tablero.tokenW / 2)),
                                                    c.r.top + ((Tablero.casillaH / 2) - (Tablero.tokenH / 2)))
                                 carta.token.Posicion = posicionDestino
                                 UnidadesEnJuego.append(carta.token)
                                 c.Contenido = carta.token
                                 carta.seleccionada = False
-                                posicionDestino = None
-                                jugador1.Mazo.append(carta)
                                 jugador1.Mano.remove(carta)
                                 main.cartaSeleccionada = False
                                 Esperar = False
+                                RobarCarta(jugador1)
+
                                 print(c.Contenido)
+
+def RobarCarta(jugador):
+    if len(jugador.Mazo) > 0:
+        n = random.randint(0, (len(jugador.Mazo)-1))
+        carta = jugador.Mazo.pop(n)
+        jugador.Mano.append(carta)
+        if jugador.id == 1:
+            for i in range(len(jugador1.Mano)):
+                jugador.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
+        else:
+            for i in range(len(jugador1.Mano)):
+                jugador.Mano[i].posicionEnMano = Tablero.ManoPl2[i]
 
 def MoverToken(casillaOrig):
     esperar = True
@@ -222,60 +237,70 @@ def MoverToken(casillaOrig):
                     esperar = False
 
 
-def requisitosMov(posicion,casilla, movimiento):
+def requisitosMov(posicion, casilla, movimiento):
     cdx, cdy = casilla
     posx, posy = posicion.pos
-    if cdx <= posx - movimiento -1 and cdy <= posy - movimiento - 1 and cdx >= posx + movimiento + 1 and posy >= posy + movimiento +1 :
+    if cdx <= posx - movimiento - 1 and cdy <= posy - movimiento - 1 and cdx >= posx + movimiento + 1 and posy >= posy + movimiento + 1:
         return True
+
+
 # Divido la anchura y altura de screen para asignarle el alto y ancho a la carta
-carta_Mostrada_W = int(screenX/5.5)
-carta_Mostrada_H = int(screenY/2.5)
+carta_Mostrada_W = int(screenX / 5.5)
+carta_Mostrada_H = int(screenY / 2.5)
 carta_Mostrada = pygame.image.load("Imagenes/ImgCartas/Carta_Negra.png")
+
 while running:
     screen.fill((0, 0, 0))
-    screen.blit(map, ((screenX/2) - (mapX/2), (screenY/2) - (mapY/2)))
+    screen.blit(map, ((screenX / 2) - (mapX / 2), (screenY / 2) - (mapY / 2)))
     # Transformo escalando la carta para que sea responsive a la dimension de la pantalla
     carta_Mostrada_Escalada = pygame.transform.scale(carta_Mostrada, (carta_Mostrada_W, carta_Mostrada_H))
     screen.blit(carta_Mostrada_Escalada, (screenX - carta_Mostrada_W, screenY - carta_Mostrada_H))
-    for u in UnidadesEnJuego:
-        if u.Posicion is not None:
-         screen.blit(u.Icono,(u.Posicion))
+    for c in Tablero.tablero:
+        if c.Contenido is not None:
+            screen.blit(c.Contenido.Icono, (c.Contenido.Posicion))
+    #for u in UnidadesEnJuego:
+    #    if u.Posicion is not None:
+    #        screen.blit(u.Icono, (u.Posicion))
+
     for i in range(len(jugador1.Mano)):
-             jugador1.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
-             screen.blit(jugador1.Mano[i].imagen, Tablero.ManoPl1[i])
+        jugador1.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
+        screen.blit(jugador1.Mano[i].imagen, Tablero.ManoPl1[i])
+
     for event in pygame.event.get():
-             if event.type == pygame.QUIT:
-                 running = False
-             # Cartas
-             # Seleccionar Carta
-             if event.type == pygame.MOUSEBUTTONUP:
-                 if event.button == 3:
-                     posicion = pygame.mouse.get_pos()
-                     for c in jugador1.Mano:
-                         if c.posicionEnMano.collidepoint(posicion):
-                             if cartaSeleccionada == False:
-                                 if c.seleccionada == False:
-                                     c.seleccionada = True
-                                     cartaSeleccionada = True
-                             mostrarBotones(posicion)
-                     # Token
-                     # Seleccionar Token
-             if event.type == pygame.MOUSEBUTTONDOWN:
-                     if event.button == 3:
-                         posicion = pygame.mouse.get_pos()
-                         for c in Tablero.tablero:
-                             if c.r.collidepoint(posicion):
-                                 if tokenSeleccionado == False:
-                                     if c.Contenido is not None:
-                                         c.Contenido.Seleccionado = True
-                                         tokenSeleccionado = True
-                                         mostrarBotones(posicion)
-                                     else:
-                                         print("coso")
-                         for c in jugador1.Mano:
-                             if c.posicionEnMano.collidepoint(posicion):
-                                 carta_Mostrada = carta_Img_Hash[c.nombre]
-                                 pygame.display.update()
-             pygame.display.update()
+        if event.type == pygame.QUIT:
+            running = False
+        # Cartas
+        # Seleccionar Carta
+        if event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 3:
+                posicion = pygame.mouse.get_pos()
+                for c in jugador1.Mano:
+                    if c.posicionEnMano.collidepoint(posicion):
+                        if cartaSeleccionada == False:
+                            if c.seleccionada == False:
+                                c.seleccionada = True
+                                cartaSeleccionada = True
+                        mostrarBotones(posicion)
+                # Token
+                # Seleccionar Token
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 3:
+                posicion = pygame.mouse.get_pos()
+                for c in Tablero.tablero:
+                    if c.r.collidepoint(posicion):
+                        if tokenSeleccionado == False:
+                            if c.Contenido is not None:
+                                c.Contenido.Seleccionado = True
+                                tokenSeleccionado = True
+                                mostrarBotones(posicion)
+                            else:
+                                print("coso")
+                for c in jugador1.Mano:
+                    if c.posicionEnMano.collidepoint(posicion):
+                        carta_Mostrada = carta_Img_Hash[c.nombre]
+                        pygame.display.update()
+
+        pygame.display.update()
+
 
 exit()
