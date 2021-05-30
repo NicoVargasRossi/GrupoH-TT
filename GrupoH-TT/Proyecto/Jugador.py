@@ -1,35 +1,41 @@
 import random
+import Tablero
 
-import pygame
-
-import Token
-from Token import *
-from Carta import *
-from Tablero import *
 
 class Jugador:
 
-    PuntosDeAccion = 3
-    PuntosDeVictoria = 0
-    UnidadesJugador = []
-
     def roboInicial(self):
         for i in range(5):
-            n = random.randint(0,19-i)
-            self.Mano.append(self.Mazo.pop(n))
+            n = random.randint(0, 19 - i)
+            self.mano.append(self.mazo.pop(n))
+
+    def robarCarta(self):
+        if len(self.mazo) > 0:
+            n = random.randint(0, (len(self.mazo) - 1))
+            carta = self.mazo.pop(n)
+            self.mano.append(carta)
+            if self.id == 1:
+                for i in range(len(self.mano)):
+                    self.mano[i].posicionEnMano = Tablero.ManoPl1[i]
+            else:
+                for i in range(len(self.mano)):
+                    self.mano[i].posicionEnMano = Tablero.ManoPl2[i]
 
     # def robaCarta(self):
     #     if len(self.Mano) < 5:
     #         n = random.randint(0, 9)
     #         self.Mano.append(self.Mazo[n])
     #         self.Mazo.pop(n)
-#
+    #
     def jugarCartas(self, Carta, Casilla):
         Casilla.Contenido = Carta.token
-        self.UnidadesJugador.append(Carta.token)
-
+        self.unidadesJugador.append(Carta.token)
 
     def __init__(self, id, MazoInicial):
         self.id = id
-        self.Mazo = MazoInicial
-        self.Mano = []
+        self.mazo = MazoInicial
+        self.mano = []
+        self.puntosDeAccion = [3]
+        self.puntosDeVictoria = [0]
+        self.unidadesJugador = []
+

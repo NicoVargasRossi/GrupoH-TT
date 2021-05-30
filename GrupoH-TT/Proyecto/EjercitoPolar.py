@@ -4,7 +4,7 @@ import pygame
 from Carta import *
 from Token import *
 
-MazoPolar = []
+mazoPolar = []
 
 # OsoPolar = ["oso", pygame.image.load("Imagenes/LogosAnimales/polar-bear.png"), 2,"",10, ["Normal","Agua"], None]
 # Gaviota = ["gaviota", pygame.image.load("Imagenes/LogosAnimales/gaviota.png"), 4,"",10, ["Normal","Agua","Bosque"], None]
@@ -19,14 +19,14 @@ imgReno = pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Imag
 imgZorro = pygame.transform.rotate(pygame.transform.scale(pygame.image.load("Imagenes/ImgCartas/Carta_Zorro.png"), (40, 80)), 90)
 # Cartas
 for i in range(4):
-    MazoPolar.append(Carta("oso polar", imgOso,
+    mazoPolar.append(Carta("oso polar", imgOso,
                            Token("oso", pygame.image.load("Imagenes/LogosAnimales/polar-bear.png"), 2,"",10, ["Normal","Agua"], None),"",""))
-    MazoPolar.append(Carta("gaviota", imgGaviota,
+    mazoPolar.append(Carta("gaviota", imgGaviota,
                            Token("gaviota", pygame.image.load("Imagenes/LogosAnimales/gaviota.png"), 4,"",10, ["Normal","Agua","Bosque"], None),"",""))
-    MazoPolar.append(Carta("zorro",imgZorro,
+    mazoPolar.append(Carta("zorro", imgZorro,
                            Token("zorro blanco", pygame.image.load("Imagenes/LogosAnimales/zorro-artico.png"), 4, "",10,["Normal","Bosque"], None),"",""))
-    MazoPolar.append(Carta("pingüino",imgPinguino,
+    mazoPolar.append(Carta("pingüino", imgPinguino,
                            Token("pungüino", pygame.image.load("Imagenes/LogosAnimales/pinguino.png"), 3,"",10, ["Normal","Agua"], None),"",""))
-    MazoPolar.append(Carta("reno",imgReno,
+    mazoPolar.append(Carta("reno", imgReno,
                            Token("reno", pygame.image.load("Imagenes/LogosAnimales/reno.png"), 3,"",10, ["Normal"], None),"",""))
 
