@@ -51,7 +51,7 @@ tokenSeleccionado = False
 UnidadesEnJuego = []
 
 running = True
-jugador1 = Jugador(1, MazoPolar)
+jugador1 = Jugador(1, mazoPolar)
 jugador1.roboInicial()
 
 # Metodos
@@ -74,7 +74,7 @@ def mostrarBotones(pos):
     Esperar = True
     while Esperar:
         FPS_CLOCK.tick(FPS)
-        for c in jugador1.Mano:
+        for c in jugador1.mano:
             if c.posicionEnMano.collidepoint(pos):
                 for b in botonesMano:
                     b.draw(main.screen)
@@ -140,14 +140,24 @@ def mostrarBotones(pos):
                 if c.Contenido is None:
                      Esperar = False
 
+def contabilizar_puntos():
+    for u in jugador1.unidadesJugador:
+        for c in Tablero.tablero:
+            if c.r.collidepoint(u.Posicion):
+                if c.Puntuacion[0] > 0 and u.PuntajeMax > 0:
+                    c.Puntuacion[0] -= 1
+                    u.PuntajeMax -= 1
+                    jugador1.puntosDeVictoria[0] += 1
+
 def retirarToken(c):
     if c.pos[0] >= 11:
         UnidadesEnJuego.remove(c.Contenido)
-        main.jugador1.Mazo.append(c.Contenido.cartaAsignada)
+        main.jugador1.mazo.append(c.Contenido.cartaAsignada)
         c.Contenido = None
         pygame.display.update()
         print (UnidadesEnJuego)
-        print (len(jugador1.Mazo))
+        print (len(jugador1.mazo))
+
 def jugarCarta(carta):
      Esperar = True
      casillasPermitidas = []
@@ -171,27 +181,31 @@ def jugarCarta(carta):
                                                    c.r.top + ((Tablero.casillaH / 2) - (Tablero.tokenH / 2)))
                                 carta.token.Posicion = posicionDestino
                                 UnidadesEnJuego.append(carta.token)
+                                jugador1.unidadesJugador.append(carta.token)
                                 c.Contenido = carta.token
                                 carta.seleccionada = False
                                 c.Contenido.cartaAsignada = carta
-                                jugador1.Mano.remove(carta)
+                                jugador1.mano.remove(carta)
                                 main.cartaSeleccionada = False
                                 Esperar = False
+                                jugador1.puntosDeAccion[0] -= 1
+                                if jugador1.puntosDeAccion[0] == 0:
+                                    contabilizar_puntos()
                                 RobarCarta(jugador1)
 
                                 print(c.Contenido)
 
 def RobarCarta(jugador):
-    if len(jugador.Mazo) > 0:
-        n = random.randint(0, (len(jugador.Mazo)-1))
-        carta = jugador.Mazo.pop(n)
-        jugador.Mano.append(carta)
+    if len(jugador.mazo) > 0:
+        n = random.randint(0, (len(jugador.mazo)-1))
+        carta = jugador.mazo.pop(n)
+        jugador.mano.append(carta)
         if jugador.id == 1:
-            for i in range(len(jugador.Mano)):
-                jugador.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
+            for i in range(len(jugador.mano)):
+                jugador.mano[i].posicionEnMano = Tablero.ManoPl1[i]
         else:
-            for i in range(len(jugador.Mano)):
-                jugador.Mano[i].posicionEnMano = Tablero.ManoPl2[i]
+            for i in range(len(jugador.mano)):
+                jugador.mano[i].posicionEnMano = Tablero.ManoPl2[i]
 
 def MoverToken(casillaOrig):
     esperar = True
@@ -257,6 +271,9 @@ def MoverToken(casillaOrig):
                                         main.tokenSeleccionado = False
                                         c.Contenido = casillaOrig.Contenido
                                         casillaOrig.Contenido = None
+                                        jugador1.puntosDeAccion[0] -= 1
+                                        if jugador1.puntosDeAccion[0] == 0:
+                                            contabilizar_puntos()
                                     elif main.tokenSeleccionado is False:
                                         esperar = False
                                         casillaOrig.Contenido.Seleccionado = False
@@ -271,8 +288,6 @@ def MoverToken(casillaOrig):
                                 esperar = False
 
                     esperar = False
-
-
 
 # Divido la anchura y altura de screen para asignarle el alto y ancho a la carta
 carta_Mostrada_W = int(screenX / 5.5)
@@ -292,9 +307,9 @@ while running:
     #    if u.Posicion is not None:
     #        screen.blit(u.Icono, (u.Posicion))
 
-    for i in range(len(jugador1.Mano)):
-        jugador1.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
-        screen.blit(jugador1.Mano[i].imagen, Tablero.ManoPl1[i])
+    for i in range(len(jugador1.mano)):
+        jugador1.mano[i].posicionEnMano = Tablero.ManoPl1[i]
+        screen.blit(jugador1.mano[i].imagen, Tablero.ManoPl1[i])
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -304,13 +319,14 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             if event.button == 3:
                 posicion = pygame.mouse.get_pos()
-                for c in jugador1.Mano:
+                for c in jugador1.mano:
                     if c.posicionEnMano.collidepoint(posicion):
                         if cartaSeleccionada == False:
                             if c.seleccionada == False:
                                 c.seleccionada = True
                                 cartaSeleccionada = True
-                        mostrarBotones(posicion)
+                        if jugador1.puntosDeAccion[0] > 0:
+                            mostrarBotones(posicion)
                 # Token
                 # Seleccionar Token
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -322,13 +338,15 @@ while running:
                             if c.Contenido is not None:
                                 c.Contenido.Seleccionado = True
                                 tokenSeleccionado = True
-                                mostrarBotones(posicion)
+                                if jugador1.puntosDeAccion[0] > 0:
+                                    mostrarBotones(posicion)
                             else:
                                 print("coso")
-                for c in jugador1.Mano:
+                for c in jugador1.mano:
                     if c.posicionEnMano.collidepoint(posicion):
                         carta_Mostrada = carta_Img_Hash[c.nombre]
                         pygame.display.update()
+
 
         pygame.display.update()
 
