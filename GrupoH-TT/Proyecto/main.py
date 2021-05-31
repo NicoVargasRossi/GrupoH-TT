@@ -42,6 +42,7 @@ button_Habilidad = button((186, 190, 195), screenX - buttonW - 5, buttonH * 2 + 
 button_Cancelar = button((186, 190, 195), screenX - buttonW - 5, buttonH * 3 + 10, buttonW, buttonH, "Cancelar")
 button_JugarCarta = button((186, 190, 195), screenX - buttonW - 5, buttonH * 1, buttonW, buttonH, "Jugar")
 button_Retirar = button((186, 190, 195), screenX - buttonW - 5, buttonH * 4 + 15, buttonW, buttonH, "Retirar")
+button_reestablecer = button((186,190,195),0,0,buttonW,buttonH,"Reestablecer") #boton para desarrollo NO ES PARA JUGAR
 botones = [button_Mover, button_Habilidad, button_Cancelar]
 botonesRetirar = [button_Mover, button_Habilidad, button_Cancelar, button_Retirar]
 botonesMano = [button_JugarCarta, button_Cancelar]
@@ -300,6 +301,7 @@ while running:
     # Transformo escalando la carta para que sea responsive a la dimension de la pantalla
     carta_Mostrada_Escalada = pygame.transform.scale(carta_Mostrada, (carta_Mostrada_W, carta_Mostrada_H))
     screen.blit(carta_Mostrada_Escalada, (screenX - carta_Mostrada_W, screenY - carta_Mostrada_H))
+    button_reestablecer.draw(screen) # boton para desarrollo NO PARA JUEGO
     for c in Tablero.tablero:
         if c.Contenido is not None:
             screen.blit(c.Contenido.Icono, (c.Contenido.Posicion))
@@ -335,11 +337,10 @@ while running:
                 for c in Tablero.tablero:
                     if c.r.collidepoint(posicion):
                         if tokenSeleccionado == False:
-                            if c.Contenido is not None:
+                            if c.Contenido is not None and jugador1.puntosDeAccion[0] > 0:
                                 c.Contenido.Seleccionado = True
                                 tokenSeleccionado = True
-                                if jugador1.puntosDeAccion[0] > 0:
-                                    mostrarBotones(posicion)
+                                mostrarBotones(posicion)
                             else:
                                 print("coso")
                 for c in jugador1.mano:
@@ -347,6 +348,14 @@ while running:
                         carta_Mostrada = carta_Img_Hash[c.nombre]
                         pygame.display.update()
 
+        # boton para desarrollo NO PARA JUEGO
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 3:
+                posicion = pygame.mouse.get_pos()
+                if button_reestablecer.rect.collidepoint(posicion):
+                    jugador1.puntosDeAccion[0] += 3
+                    print(jugador1.puntosDeAccion[0])
+                    print(jugador1.puntosDeVictoria[0])
 
         pygame.display.update()
 
