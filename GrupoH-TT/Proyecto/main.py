@@ -52,7 +52,7 @@ tokenSeleccionado = False
 UnidadesEnJuego = []
 
 running = True
-jugador1 = Jugador(1, mazoPolar)
+jugador1 = Jugador(1, mazoSelva)
 jugador1.roboInicial()
 
 # Metodos
@@ -145,13 +145,14 @@ def contabilizar_puntos():
     for u in jugador1.unidadesJugador:
         for c in Tablero.tablero:
             if c.r.collidepoint(u.Posicion):
-                if c.Puntuacion[0] > 0 and u.PuntajeMax >= c.Puntuacion[0]:
-                    u.PuntajeMax -= c.Puntuacion[0]
-                    jugador1.puntosDeVictoria[0] += c.Puntuacion[0]
+                if c.Puntuacion[1] > 0 and u.PuntajeMax >= c.Puntuacion[1]:
+                    u.PuntajeMax -= c.Puntuacion[1]
+                    jugador1.puntosDeVictoria[0] += c.Puntuacion[1]
 
 def retirarToken(c):
     if c.pos[0] >= 11:
         UnidadesEnJuego.remove(c.Contenido)
+        c.Contenido.PuntajeMax = 10
         main.jugador1.mazo.append(c.Contenido.cartaAsignada)
         c.Contenido = None
         pygame.display.update()
