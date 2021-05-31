@@ -48,12 +48,13 @@ botonesRetirar = [button_Mover, button_Habilidad, button_Cancelar, button_Retira
 botonesMano = [button_JugarCarta, button_Cancelar]
 cartaSeleccionada = False
 tokenSeleccionado = False
+
 # Loop de juego
 UnidadesEnJuego = []
-
 running = True
 jugador1 = Jugador(1, mazoSelva)
 jugador1.roboInicial()
+
 
 # Metodos
 def paint_button(button):
@@ -71,6 +72,7 @@ def paint_button(button):
         pygame.display.update()
     if button == button_Retirar:
         button_Retirar.draw(main.screen, (255, 244, 0))
+
 def mostrarBotones(pos):
     Esperar = True
     while Esperar:
