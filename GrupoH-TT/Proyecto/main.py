@@ -145,10 +145,9 @@ def contabilizar_puntos():
     for u in jugador1.unidadesJugador:
         for c in Tablero.tablero:
             if c.r.collidepoint(u.Posicion):
-                if c.Puntuacion[0] > 0 and u.PuntajeMax > 0:
-                    c.Puntuacion[0] -= 1
-                    u.PuntajeMax -= 1
-                    jugador1.puntosDeVictoria[0] += 1
+                if c.Puntuacion[0] > 0 and u.PuntajeMax >= c.Puntuacion[0]:
+                    u.PuntajeMax -= c.Puntuacion[0]
+                    jugador1.puntosDeVictoria[0] += c.Puntuacion[0]
 
 def retirarToken(c):
     if c.pos[0] >= 11:
