@@ -191,9 +191,11 @@ def jugarCarta(carta):
                                 jugador1.mano.remove(carta)
                                 main.cartaSeleccionada = False
                                 Esperar = False
+                                #envio de info al otro jugador (id accion),(datos token)
                                 jugador1.puntosDeAccion[0] -= 1
                                 if jugador1.puntosDeAccion[0] == 0:
                                     contabilizar_puntos()
+                                    #envio de info a otro jugador (id cambio de turno),
                                 RobarCarta(jugador1)
 
                                 print(c.Contenido)
@@ -275,8 +277,10 @@ def MoverToken(casillaOrig):
                                         c.Contenido = casillaOrig.Contenido
                                         casillaOrig.Contenido = None
                                         jugador1.puntosDeAccion[0] -= 1
+                                        #envio de info a otro jugador (id accion),(casilla origen, casilla destino)
                                         if jugador1.puntosDeAccion[0] == 0:
                                             contabilizar_puntos()
+                                            #envio de info al otro jugador (id cambio de turno)
                                     elif main.tokenSeleccionado is False:
                                         esperar = False
                                         casillaOrig.Contenido.Seleccionado = False
