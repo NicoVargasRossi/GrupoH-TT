@@ -15,6 +15,12 @@ from Jugador import *
 from Carta import *
 from button import *
 from EjercitoPolar import *
+from socket import *
+
+s = socket(AF_INET,SOCK_STREAM)
+s.bind(("", 8000))
+s.listen(5)
+conexion, direcion = s.accept()
 
 # Inicialización y display
 pygame.init()
@@ -280,7 +286,7 @@ def MoverToken(casillaOrig):
                                         #envio de info a otro jugador (id accion),(casilla origen, casilla destino)
                                         if jugador1.puntosDeAccion[0] == 0:
                                             contabilizar_puntos()
-                                            #envio de info al otro jugador (id cambio de turno)
+                                            conexion.send(str("me quede sin puntos").encode('utf-8'))
                                     elif main.tokenSeleccionado is False:
                                         esperar = False
                                         casillaOrig.Contenido.Seleccionado = False
@@ -296,6 +302,20 @@ def MoverToken(casillaOrig):
 
                     esperar = False
 
+def recibe_orden():
+    orden_juego = conexion.recv(1024)  # queda a la espera de orden
+    lista_movimiento = orden_juego.decode('utf-8').split()  # separa la orden en una lsita de strings
+    print(lista_movimiento)  # el primer elemento deberia ser el tipo de accion
+    if lista_movimiento[0] == "1":  # orden de reestablecer
+        print("reestableciendo")
+        jugador1.puntosDeAccion[0] = 3
+    elif lista_movimiento[0] == "2":
+        print("muevo un token y espero otra orden")
+        conexion.send(str("estoy esperando otra orden").encode('utf-8'))
+    else:
+        conexion.send(str("no quedamos en eso pa").encode('utf-8'))
+    # recibe accion y ejecuta en tablero hasta que una accion reestablesca los puntos de accion para volver a jugar
+
 # Divido la anchura y altura de screen para asignarle el alto y ancho a la carta
 carta_Mostrada_W = int(screenX / 5.5)
 carta_Mostrada_H = int(screenY / 2.5)
@@ -308,16 +328,20 @@ while running:
     carta_Mostrada_Escalada = pygame.transform.scale(carta_Mostrada, (carta_Mostrada_W, carta_Mostrada_H))
     screen.blit(carta_Mostrada_Escalada, (screenX - carta_Mostrada_W, screenY - carta_Mostrada_H))
     button_reestablecer.draw(screen) # boton para desarrollo NO PARA JUEGO
-    for c in Tablero.tablero:
-        if c.Contenido is not None:
-            screen.blit(c.Contenido.Icono, (c.Contenido.Posicion))
-    #for u in UnidadesEnJuego:
-    #    if u.Posicion is not None:
-    #        screen.blit(u.Icono, (u.Posicion))
+    #for c in Tablero.tablero:
+    #    if c.Contenido is not None:
+    #        screen.blit(c.Contenido.Icono, (c.Contenido.Posicion))
+    for u in UnidadesEnJuego:
+        if u.Posicion is not None:
+            screen.blit(u.Icono, (u.Posicion))
 
     for i in range(len(jugador1.mano)):
         jugador1.mano[i].posicionEnMano = Tablero.ManoPl1[i]
         screen.blit(jugador1.mano[i].imagen, Tablero.ManoPl1[i])
+
+    pygame.display.update()
+    if jugador1.puntosDeAccion[0]==0:
+        recibe_orden()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -363,7 +387,8 @@ while running:
                     print(jugador1.puntosDeAccion[0])
                     print(jugador1.puntosDeVictoria[0])
 
-        pygame.display.update()
+    pygame.display.update()
+
 
 
 exit()
