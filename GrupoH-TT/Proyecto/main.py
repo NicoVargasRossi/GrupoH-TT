@@ -34,7 +34,9 @@ mainRect = pygame.Rect(0, 0, screenX, screenY)
 mapX = Tablero.mapX
 mapY = Tablero.mapY
 map = pygame.image.load('Imagenes/map.png')
+map = pygame.transform.scale(map,(Tablero.mapX,Tablero.mapY))
 
+#botones
 buttonW = 60
 buttonH = 25
 button_Mover = button((186, 190, 195), screenX - buttonW - 5, buttonH * 1, buttonW, buttonH, "Mover")
@@ -46,6 +48,8 @@ button_reestablecer = button((186,190,195),0,0,buttonW,buttonH,"Reestablecer") #
 botones = [button_Mover, button_Habilidad, button_Cancelar]
 botonesRetirar = [button_Mover, button_Habilidad, button_Cancelar, button_Retirar]
 botonesMano = [button_JugarCarta, button_Cancelar]
+#---------
+
 cartaSeleccionada = False
 tokenSeleccionado = False
 # Loop de juego
@@ -160,6 +164,7 @@ def retirarToken(c):
         print (len(jugador1.mazo))
 
 def jugarCarta(carta):
+
      Esperar = True
      casillasPermitidas = []
      while Esperar:
@@ -291,28 +296,35 @@ def MoverToken(casillaOrig):
                     esperar = False
 
 # Divido la anchura y altura de screen para asignarle el alto y ancho a la carta
-carta_Mostrada_W = int(screenX / 5.5)
-carta_Mostrada_H = int(screenY / 2.5)
+carta_Mostrada_W = int(screenX / 6)
+carta_Mostrada_H = int(screenY / 3)
 carta_Mostrada = pygame.image.load("Imagenes/ImgCartas/Carta_Negra.png")
 
+
+Dorso_Carta = pygame.image.load("Imagenes/ImgCartas/Dorso_De_Carta.png")
+Dorso_Carta_Escalado = pygame.transform.scale(Dorso_Carta, (Tablero.carta_ManoH,Tablero.carta_ManoW))
+Dorso_Carta_Escalado = pygame.transform.rotate(Dorso_Carta_Escalado, 90)
+
+UnidadesEnJuego = []
+running = True
+jugador1 = Jugador(mazoSelva)
+
+#Loop de juego
 while running:
     screen.fill((0, 0, 0))
-    screen.blit(map, ((screenX / 2) - (mapX / 2), (screenY / 2) - (mapY / 2)))
+    screen.blit(map, ((screenX / 4) - (mapX / 4), (screenY / 2) - (mapY / 2)))
     # Transformo escalando la carta para que sea responsive a la dimension de la pantalla
     carta_Mostrada_Escalada = pygame.transform.scale(carta_Mostrada, (carta_Mostrada_W, carta_Mostrada_H))
-    screen.blit(carta_Mostrada_Escalada, (screenX - carta_Mostrada_W, screenY - carta_Mostrada_H))
-    button_reestablecer.draw(screen) # boton para desarrollo NO PARA JUEGO
-    for c in Tablero.tablero:
-        if c.Contenido is not None:
-            screen.blit(c.Contenido.Icono, (c.Contenido.Posicion))
-    #for u in UnidadesEnJuego:
-    #    if u.Posicion is not None:
-    #        screen.blit(u.Icono, (u.Posicion))
+    screen.blit(carta_Mostrada_Escalada, (screenX - carta_Mostrada_W - casillaW, screenY - carta_Mostrada_H - (casillaH/2)))
+    for u in UnidadesEnJuego:
+        if u.Posicion is not None:
+         screen.blit(u.Icono,(u.Posicion))
 
-    for i in range(len(jugador1.mano)):
-        jugador1.mano[i].posicionEnMano = Tablero.ManoPl1[i]
-        screen.blit(jugador1.mano[i].imagen, Tablero.ManoPl1[i])
-
+    for i in range(len(jugador1.Mano)):
+             jugador1.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
+             screen.blit(jugador1.Mano[i].imagen, Tablero.ManoPl1[i])
+    for i in range(len(Tablero.ManoPl2)):
+            screen.blit(Dorso_Carta_Escalado,Tablero.ManoPl2[i])
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -342,7 +354,7 @@ while running:
                                 tokenSeleccionado = True
                                 mostrarBotones(posicion)
                             else:
-                                print("coso")
+                                print("flag 1")
                 for c in jugador1.mano:
                     if c.posicionEnMano.collidepoint(posicion):
                         carta_Mostrada = carta_Img_Hash[c.nombre]
