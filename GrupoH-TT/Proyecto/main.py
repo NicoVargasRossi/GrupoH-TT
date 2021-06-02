@@ -50,14 +50,7 @@ botonesRetirar = [button_Mover, button_Habilidad, button_Cancelar, button_Retira
 botonesMano = [button_JugarCarta, button_Cancelar]
 #---------
 
-cartaSeleccionada = False
-tokenSeleccionado = False
-# Loop de juego
-UnidadesEnJuego = []
 
-running = True
-jugador1 = Jugador(1, mazoSelva)
-jugador1.roboInicial()
 
 # Metodos
 def paint_button(button):
@@ -75,6 +68,7 @@ def paint_button(button):
         pygame.display.update()
     if button == button_Retirar:
         button_Retirar.draw(main.screen, (255, 244, 0))
+
 def mostrarBotones(pos):
     Esperar = True
     while Esperar:
@@ -305,9 +299,13 @@ Dorso_Carta = pygame.image.load("Imagenes/ImgCartas/Dorso_De_Carta.png")
 Dorso_Carta_Escalado = pygame.transform.scale(Dorso_Carta, (Tablero.carta_ManoH,Tablero.carta_ManoW))
 Dorso_Carta_Escalado = pygame.transform.rotate(Dorso_Carta_Escalado, 90)
 
+# Loop de juego
 UnidadesEnJuego = []
 running = True
-jugador1 = Jugador(mazoSelva)
+jugador1 = Jugador(1, mazoSelva)
+jugador1.roboInicial()
+cartaSeleccionada = False
+tokenSeleccionado = False
 
 #Loop de juego
 while running:
@@ -320,9 +318,9 @@ while running:
         if u.Posicion is not None:
          screen.blit(u.Icono,(u.Posicion))
 
-    for i in range(len(jugador1.Mano)):
-             jugador1.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
-             screen.blit(jugador1.Mano[i].imagen, Tablero.ManoPl1[i])
+    for i in range(len(jugador1.mano)):
+             jugador1.mano[i].posicionEnMano = Tablero.ManoPl1[i]
+             screen.blit(jugador1.mano[i].imagen, Tablero.ManoPl1[i])
     for i in range(len(Tablero.ManoPl2)):
             screen.blit(Dorso_Carta_Escalado,Tablero.ManoPl2[i])
     for event in pygame.event.get():
