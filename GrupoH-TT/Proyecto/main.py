@@ -30,7 +30,7 @@ screen = pygame.display.set_mode((screenX, screenY))
 mainRect = pygame.Rect(0,0,screenX,screenY)
 mapX = Tablero.mapX
 mapY = Tablero.mapY
-map = pygame.image.load('Imagenes/map.png')
+map =  Tablero.map
 
 buttonW = 60
 buttonH = 25
@@ -133,7 +133,6 @@ def mostrarBotones(pos):
                                                 Esperar = False
                 if c.Contenido is None:
                      Esperar = False
-
 def retirarToken(c):
     if c.pos[0] >= 11:
         UnidadesEnJuego.remove(c.Contenido)
@@ -174,7 +173,6 @@ def jugarCarta(carta):
                                     main.cartaSeleccionada = False
                                     Esperar = False
                                     print(c.Contenido)
-
 def MoverToken(casillaOrig):
     esperar = True
     casillasPermitidas = []
@@ -254,18 +252,17 @@ def MoverToken(casillaOrig):
 
                     esperar = False
 
+#Arreglar*
+carta_Mostrada_W = Tablero.carta_Mostrada_W
+carta_Mostrada_H = Tablero.carta_Mostrada_H
+carta_Mostrada = Tablero.carta_Mostrada
 
-
-# Divido la anchura y altura de screen para asignarle el alto y ancho a la carta
-carta_Mostrada_W = int(screenX/5.5)
-carta_Mostrada_H = int(screenY/2.5)
-carta_Mostrada = pygame.image.load("Imagenes/ImgCartas/Carta_Negra.png")
 while running:
     screen.fill((0, 0, 0))
-    screen.blit(map, ((screenX/2) - (mapX/2), (screenY/2) - (mapY/2)))
+    screen.blit(map, ((screenX/4) - (mapX/4), (screenY/2) - (mapY/2)))
     # Transformo escalando la carta para que sea responsive a la dimension de la pantalla
     carta_Mostrada_Escalada = pygame.transform.scale(carta_Mostrada, (carta_Mostrada_W, carta_Mostrada_H))
-    screen.blit(carta_Mostrada_Escalada, (screenX - carta_Mostrada_W, screenY - carta_Mostrada_H))
+    screen.blit(carta_Mostrada_Escalada, ((screenX * (3/4) + screenX/16), ((screenY/2) + screenY/16)))
     for u in UnidadesEnJuego:
         if u.Posicion is not None:
          screen.blit(u.Icono,(u.Posicion))
