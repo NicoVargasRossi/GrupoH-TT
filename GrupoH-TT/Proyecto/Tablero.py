@@ -5,8 +5,9 @@ from Casilla import *
 from Carta import *
 
 #La resolucion se cambia seleccionando screenX y screenY
-screenX = 1248
-screenY = 576
+#Recomendados (1248x576, 780x360, 1560x720, 1300 x 600)
+screenX = 1300
+screenY = 600
 
 
 #El tablero puede cambiar de tamaño pero hay que ajustar el tamaño de las casillas segun sea la distribucion del nuevo tablero
@@ -14,6 +15,8 @@ mapX = screenX/2
 mapY = screenY/2
 map = pygame.image.load('Imagenes/map.png')
 map = pygame.transform.scale(map, (int(screenX/2),int(screenY/2)))
+fondo_Hud = pygame.image.load("Imagenes/fondo_Hud.png")
+fondo_Hud = pygame.transform.scale(fondo_Hud, (int(screenX/4),int(screenY)))
 
 # Tamaño del Rect de las casillas
 casillaW = mapX/13
@@ -22,12 +25,19 @@ casillaH = mapY/6
 tokenW = casillaW/2
 tokenH = casillaH/2
 # Tamaño del rect de las cartas en la mano
-carta_ManoW = screenX/16
-carta_ManoH = screenY/8
+carta_ManoW = int(screenX/16)
+carta_ManoH = int(screenY/8)
+
+#Cuadro de puntuacion
+cuadro_De_puntuacion = pygame.image.load("Imagenes/cuadro puntuacion.png")
+cuadro_De_puntuacion = pygame.transform.scale(cuadro_De_puntuacion,(int(screenX/8), int(screenY * 3/16)))
+
+
 
 carta_Mostrada_W = int(screenX/8)
 carta_Mostrada_H = int(screenY * (5/16))
 carta_Mostrada = pygame.image.load("Imagenes/ImgCartas/Carta_Negra.png")
+
 
 relacion_Map_ScreenX = (screenX/4) - (mapX/4)
 relacion_Map_ScreenY = (screenY/2) - (mapY/2)
@@ -111,16 +121,16 @@ Casilla123 = Casilla("Normal",(12,3),None, (5,0), "No", relacion_Map_ScreenX + (
 Casilla124 = Casilla("Normal",(12,4),None, (0,0), "No", relacion_Map_ScreenX + (casillaW * 12), (screenY/2) - (mapY/2) + (casillaH *4),casillaW,casillaH)
 Casilla125 = Casilla("Normal",(12,5),None, (0,0), "No", relacion_Map_ScreenX + (casillaW * 12), (screenY/2) - (mapY/2) + (casillaH *5),casillaW,casillaH)
 
-r1 = pygame.Rect((relacion_Map_ScreenX + mapX + screenX/16 ),(screenY/2) - (mapY/2) + (carta_ManoH * 0),carta_ManoW,carta_ManoH)
-r2 = pygame.Rect((relacion_Map_ScreenX + mapX + screenX/16 ),(screenY/2) - (mapY/2) + (carta_ManoH * 1),carta_ManoW,carta_ManoH)
-r3 = pygame.Rect((relacion_Map_ScreenX + mapX + screenX/16 ),(screenY/2) - (mapY/2) + (carta_ManoH * 2),carta_ManoW,carta_ManoH)
-r4 = pygame.Rect((relacion_Map_ScreenX + mapX + screenX/16 ),(screenY/2) - (mapY/2) + (carta_ManoH * 3),carta_ManoW,carta_ManoH)
-r5 = pygame.Rect((relacion_Map_ScreenX + mapX + screenX/16 ),(screenY/2) - (mapY/2) + (carta_ManoH * 4),carta_ManoW,carta_ManoH)
-l1 = pygame.Rect(0,0,50,50)
-l2 = pygame.Rect(0,50,50,50)
-l3 = pygame.Rect(0,100,50,50)
-l4 = pygame.Rect(0,150,50,50)
-l5 = pygame.Rect(0,200,50,50)
+r1 = pygame.Rect((relacion_Map_ScreenX + mapX + screenX/16 ),(screenY/2) - (mapY/2) - (screenY/16) + (carta_ManoH * 0),carta_ManoW,carta_ManoH)
+r2 = pygame.Rect((relacion_Map_ScreenX + mapX + screenX/16 ),(screenY/2) - (mapY/2) - (screenY/16) + (carta_ManoH * 1),carta_ManoW,carta_ManoH)
+r3 = pygame.Rect((relacion_Map_ScreenX + mapX + screenX/16 ),(screenY/2) - (mapY/2) - (screenY/16) + (carta_ManoH * 2),carta_ManoW,carta_ManoH)
+r4 = pygame.Rect((relacion_Map_ScreenX + mapX + screenX/16 ),(screenY/2) - (mapY/2) - (screenY/16) + (carta_ManoH * 3),carta_ManoW,carta_ManoH)
+r5 = pygame.Rect((relacion_Map_ScreenX + mapX + screenX/16 ),(screenY/2) - (mapY/2) - (screenY/16) + (carta_ManoH * 4),carta_ManoW,carta_ManoH)
+l1 = pygame.Rect((0),(screenY/2) - (mapY/2) - (screenY/16) + (carta_ManoH * 0),carta_ManoW,carta_ManoH)
+l2 = pygame.Rect((0),(screenY/2) - (mapY/2) - (screenY/16) + (carta_ManoH * 1),carta_ManoW,carta_ManoH)
+l3 = pygame.Rect((0),(screenY/2) - (mapY/2) - (screenY/16) + (carta_ManoH * 2),carta_ManoW,carta_ManoH)
+l4 = pygame.Rect((0),(screenY/2) - (mapY/2) - (screenY/16) + (carta_ManoH * 3),carta_ManoW,carta_ManoH)
+l5 = pygame.Rect((0),(screenY/2) - (mapY/2) - (screenY/16) + (carta_ManoH * 4),carta_ManoW,carta_ManoH)
 
 tablero = [Casilla00,Casilla01,Casilla02,Casilla03,Casilla04,Casilla05,
            Casilla10,Casilla11,Casilla12,Casilla13,Casilla14,Casilla15,
@@ -161,3 +171,5 @@ carta_Img_Hash = {
 
 ManoPl1 = [r1,r2,r3,r4,r5]
 ManoPl2 = [l1,l2,l3,l4,l5]
+img_Dorso_Carta = pygame.image.load("Imagenes/ImgCartas/Dorso_De_Carta.png")
+img_Dorso_Carta = pygame.transform.scale(img_Dorso_Carta, (carta_ManoW,carta_ManoH))

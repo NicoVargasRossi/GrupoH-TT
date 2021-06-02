@@ -32,13 +32,14 @@ mapX = Tablero.mapX
 mapY = Tablero.mapY
 map =  Tablero.map
 
-buttonW = 60
-buttonH = 25
-button_Mover = button ((186, 190, 195), screenX - buttonW - 5, buttonH * 1, buttonW, buttonH, "Mover")
-button_Habilidad = button ((186, 190, 195), screenX - buttonW - 5, buttonH * 2 + 5, buttonW, buttonH, "Habilidad")
-button_Cancelar = button ((186,190,195), screenX-buttonW - 5, buttonH * 3 + 10,buttonW,buttonH, "Cancelar")
-button_JugarCarta = button ((186,190,195), screenX-buttonW - 5, buttonH * 1, buttonW,buttonH, "Jugar")
-button_Retirar = button ((186,190,195), screenX-buttonW - 5, buttonH * 4 + 15,buttonW,buttonH, "Retirar")
+buttonW = screenX/16
+buttonH = screenY/16
+
+button_Mover = button ((186, 190, 195), ((screenX * 3/4) + screenX/8), screenY/16, buttonW, buttonH, "Mover")
+button_Habilidad = button ((186, 190, 195), ((screenX * 3/4) + screenX/8), screenY/8, buttonW, buttonH, "Habilidad")
+button_Cancelar = button ((186,190,195), ((screenX * 3/4) + (screenX/16)), (screenY/4 - screenY/16),buttonW,buttonH, "Cancelar")
+button_JugarCarta = button ((186,190,195), ((screenX * 3/4) + (screenX/16)), screenY/16, buttonW,buttonH, "Jugar")
+button_Retirar = button ((186,190,195), ((screenX * 3/4) + (screenX/8)), (screenY/4 - screenY/16),buttonW,buttonH, "Retirar")
 botones = [button_Mover, button_Habilidad, button_Cancelar]
 botonesRetirar = [button_Mover, button_Habilidad, button_Cancelar, button_Retirar]
 botonesMano = [button_JugarCarta, button_Cancelar]
@@ -258,17 +259,23 @@ carta_Mostrada_H = Tablero.carta_Mostrada_H
 carta_Mostrada = Tablero.carta_Mostrada
 
 while running:
-    screen.fill((0, 0, 0))
+    screen.fill((160, 216, 160))
     screen.blit(map, ((screenX/4) - (mapX/4), (screenY/2) - (mapY/2)))
+    screen.blit(Tablero.fondo_Hud, (screenX * (3 / 4), 0))
+    screen.blit(Tablero.cuadro_De_puntuacion, (int(screenX * 13/16), int(screenY * 5/16)))
+
     # Transformo escalando la carta para que sea responsive a la dimension de la pantalla
     carta_Mostrada_Escalada = pygame.transform.scale(carta_Mostrada, (carta_Mostrada_W, carta_Mostrada_H))
     screen.blit(carta_Mostrada_Escalada, ((screenX * (3/4) + screenX/16), ((screenY/2) + screenY/16)))
+
     for u in UnidadesEnJuego:
         if u.Posicion is not None:
          screen.blit(u.Icono,(u.Posicion))
     for i in range(len(jugador1.Mano)):
              jugador1.Mano[i].posicionEnMano = Tablero.ManoPl1[i]
              screen.blit(jugador1.Mano[i].imagen, Tablero.ManoPl1[i])
+    for carta in range(len(Tablero.ManoPl2)):
+             screen.blit(Tablero.img_Dorso_Carta, Tablero.ManoPl2[carta] )
     for event in pygame.event.get():
              if event.type == pygame.QUIT:
                  running = False
