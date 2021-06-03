@@ -8,6 +8,7 @@ import Tablero
 import Token
 import main
 import EjercitoPolar
+from Token import *
 from Tablero import *
 from Casilla import *
 from EjercitoSelva import *
@@ -58,7 +59,7 @@ tokenSeleccionado = False
 # Loop de juego
 UnidadesEnJuego = []
 running = True
-jugador1 = Jugador(1, mazoSelva)
+jugador1 = Jugador(1, mazoPolar)
 jugador1.roboInicial()
 
 
@@ -311,24 +312,27 @@ def recibe_orden():
         jugador1.puntosDeAccion[0] = 3
     elif lista_movimiento[0] == "1":
         print("creo token y espero otra orden")
-        nombre_token = lista_movimiento[1],
-        icono_token = IconoMono,
-        movimiento_token = int(lista_movimiento[2])
-        efecto_token = lista_movimiento[3]
-        puntaje_max_token = int(lista_movimiento[4])
-        posicion_token = (float(lista_movimiento[5]), float(lista_movimiento[6]))
-        terrenos_token = []
-        for terreno in range(int(lista_movimiento[7])):
-            terrenos_token.append(lista_movimiento[8+terreno])
-
-        token_agregar = Token(nombre_token, IconoMono, movimiento_token, efecto_token,
-                              puntaje_max_token, terrenos_token, None)
+        #nombre_token = lista_movimiento[1],
+        #icono_token = IconoMono,
+        #movimiento_token = int(lista_movimiento[2])
+        #efecto_token = lista_movimiento[3]
+        #puntaje_max_token = int(lista_movimiento[4])
+        #posicion_token = (float(lista_movimiento[5]), float(lista_movimiento[6]))
+        #terrenos_token = []
+        #for terreno in range(int(lista_movimiento[7])):
+        #    terrenos_token.append(lista_movimiento[8+terreno])
+        #token_agregar = Token(nombre_token, IconoMono, movimiento_token, efecto_token,
+        #                      puntaje_max_token, terrenos_token, None)
+        print(lista_movimiento[1])
+        tipo = lista_movimiento[1]
+        token_agregar = crea_token(tipo)
+        posicion_token = (float(lista_movimiento[2]), float(lista_movimiento[3]))
         token_agregar.Posicion = posicion_token
 
         for c in tablero:
             if c.r.collidepoint(posicion_token):
                 c.Contenido = token_agregar
-
+#
         UnidadesEnJuego.append(token_agregar)
 
         conexion.send(str("estoy esperando otra orden").encode('utf-8'))

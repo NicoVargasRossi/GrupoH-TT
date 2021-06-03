@@ -11,8 +11,8 @@ while True:
     orden = input()
 
     if orden.split()[0] == "1":
-        orden = "1 mono 3 Escabullirse 15 346 309 2 Normal Bosque"
-
+        #orden = "1 mono 3 Escabullirse 15 346 309 2 Normal Bosque"
+        orden = "1 OsoPolar 346 309"
     s.send(orden.encode('utf-8'))
 
     if orden == "salir":

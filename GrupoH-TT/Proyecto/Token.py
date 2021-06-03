@@ -24,5 +24,10 @@ class Token:
             for i in range (self.Movimiento):
                 pygame.draw.rect(screen, (0,127,0), Tablero.tablero_Hash[(pos_Tok_X + i,pos_Tok_Y + i)].r)
 
-    def efecto():
+    def efecto(self):
         pass
+
+
+def crea_token(tipo):
+    if tipo == "OsoPolar":
+        return Token("oso", pygame.image.load("Imagenes/LogosAnimales/polar-bear.png"), 2,"",10, ["Normal","Agua"], None)
