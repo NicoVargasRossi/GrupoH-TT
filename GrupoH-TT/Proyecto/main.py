@@ -156,6 +156,7 @@ def contabilizar_puntos():
                 if c.Puntuacion[1] > 0 and u.PuntajeMax >= c.Puntuacion[1]:
                     u.PuntajeMax -= c.Puntuacion[1]
                     jugador1.puntosDeVictoria[0] += c.Puntuacion[1]
+    conexion.send(str("me quede sin puntos").encode('utf-8'))
 
 def retirarToken(c):
     if c.pos[0] >= 11:
@@ -286,7 +287,6 @@ def MoverToken(casillaOrig):
                                         #envio de info a otro jugador (id accion),(casilla origen, casilla destino)
                                         if jugador1.puntosDeAccion[0] == 0:
                                             contabilizar_puntos()
-                                            conexion.send(str("me quede sin puntos").encode('utf-8'))
                                     elif main.tokenSeleccionado is False:
                                         esperar = False
                                         casillaOrig.Contenido.Seleccionado = False
@@ -306,11 +306,31 @@ def recibe_orden():
     orden_juego = conexion.recv(1024)  # queda a la espera de orden
     lista_movimiento = orden_juego.decode('utf-8').split()  # separa la orden en una lsita de strings
     print(lista_movimiento)  # el primer elemento deberia ser el tipo de accion
-    if lista_movimiento[0] == "1":  # orden de reestablecer
+    if lista_movimiento[0] == "3":  # orden de reestablecer
         print("reestableciendo")
         jugador1.puntosDeAccion[0] = 3
-    elif lista_movimiento[0] == "2":
-        print("muevo un token y espero otra orden")
+    elif lista_movimiento[0] == "1":
+        print("creo token y espero otra orden")
+        nombre_token = lista_movimiento[1],
+        icono_token = IconoMono,
+        movimiento_token = int(lista_movimiento[2])
+        efecto_token = lista_movimiento[3]
+        puntaje_max_token = int(lista_movimiento[4])
+        posicion_token = (float(lista_movimiento[5]), float(lista_movimiento[6]))
+        terrenos_token = []
+        for terreno in range(int(lista_movimiento[7])):
+            terrenos_token.append(lista_movimiento[8+terreno])
+
+        token_agregar = Token(nombre_token, IconoMono, movimiento_token, efecto_token,
+                              puntaje_max_token, terrenos_token, None)
+        token_agregar.Posicion = posicion_token
+
+        for c in tablero:
+            if c.r.collidepoint(posicion_token):
+                c.Contenido = token_agregar
+
+        UnidadesEnJuego.append(token_agregar)
+
         conexion.send(str("estoy esperando otra orden").encode('utf-8'))
     else:
         conexion.send(str("no quedamos en eso pa").encode('utf-8'))

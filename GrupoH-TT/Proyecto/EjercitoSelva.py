@@ -82,8 +82,10 @@ mazoSelva = [cleon1,cleon2,cleon3,cleon4,
              ctucan1,ctucan2,ctucan3,ctucan4,
              ccebra1,ccebra2,ccebra3,ccebra4]
 
-mazoSelva2 = [cleon1,cleon2,cleon3,cleon4,
-             celefante1,celefante2,celefante3,celefante4,
-             cmono1,cmono2,cmono3,cmono4,
-             ctucan1,ctucan2,ctucan3,ctucan4,
-             ccebra1,ccebra2,ccebra3,ccebra4]
+icono_hash = {
+    "mono": IconoMono,
+    "leon": IconoLeon,
+    "cebra": IconoCebra,
+    "tucan": IconoTucan,
+    "elefante": IconoElefante
+}
