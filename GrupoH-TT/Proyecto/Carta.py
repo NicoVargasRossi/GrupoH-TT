@@ -12,6 +12,7 @@ class Carta:
         self.token = token
         self.efecto = efecto
         self.detalles = detalles
+
 imgCarta_Leon_compl = pygame.transform.scale(pygame.image.load("Imagenes/ImgCartas/Carta_Leon.png"),(150,200))
 imgCarta_Cebra_compl = pygame.transform.scale(pygame.image.load("Imagenes/ImgCartas/Carta_Cebra.png"),(150,200))
 imgCarta_Mono_compl = pygame.transform.scale(pygame.image.load("Imagenes/ImgCartas/Carta_Mono.png"),(150,200))
