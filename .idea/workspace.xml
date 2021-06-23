@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="279f1f0f-f844-4fbb-9416-da41787bd2a9" name="Default Changelist" comment="Retirar, pintar casillas al jugar">
+    <list default="true" id="279f1f0f-f844-4fbb-9416-da41787bd2a9" name="Default Changelist" comment="nuevo Layout, responsive">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/EjercitoSelva.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/EjercitoSelva.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/Tablero.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/Tablero.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +39,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/Online-Chess-Game-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
@@ -48,9 +50,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Ulises Bernal\PycharmProjects\TacticasSalvajes\GrupoH-TT\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/GrupoH-TT/Proyecto" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" />
@@ -119,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622064685071</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="nuevo Layout, responsive">
+      <created>1622646745113</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1622646745113</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -150,6 +159,7 @@
     <MESSAGE value="clase button, y avanzo en el main, agrego carpeta img para tener png ordenados" />
     <MESSAGE value="Avanzo en loop ppal" />
     <MESSAGE value="Retirar, pintar casillas al jugar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Retirar, pintar casillas al jugar" />
+    <MESSAGE value="nuevo Layout, responsive" />
+    <option name="LAST_COMMIT_MESSAGE" value="nuevo Layout, responsive" />
   </component>
 </project>
