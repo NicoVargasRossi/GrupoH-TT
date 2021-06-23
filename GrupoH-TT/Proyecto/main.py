@@ -7,6 +7,7 @@ import EjercitoSelva
 import Tablero
 import Token
 import main
+import Habilidades
 from Tablero import *
 from Casilla import *
 from EjercitoSelva import *
@@ -111,11 +112,13 @@ def mostrarBotones(pos):
                                             MoverToken(c)
                                             main.tokenSeleccionado = False
                                             Esperar = False
-                                        elif btn.text == "Efecto":
+                                        elif btn.text == "Habilidad":
                                             paint_button(button_Habilidad)
-                                            Esperar = False
+                                            c.Contenido.Seleccionado = True
+                                            main.tokenSeleccionado = True
+                                            habilidad(c)
                                             main.tokenSeleccionado = False
-                                            c.Contenido.Seleccionado = False
+                                            Esperar = False
                                         elif btn.text == "Cancelar":
                                             paint_button(button_Cancelar)
                                             Esperar = False
@@ -254,7 +257,27 @@ def MoverToken(casillaOrig):
 
                     esperar = False
 
-
+def habilidad(casillaOrig):
+    esperar = True
+    pos = Tablero.Casilla
+    casillasPermitidas = []
+    tokenUnidad = casillaOrig.Contenido
+    #pos_Tok_X, pos_Tok_Y = casillaOrig.pos
+    if tokenUnidad.Nombre == "mono":
+        while esperar:
+                        for event in pygame.event.get():
+                            if event.type == pygame.MOUSEBUTTONDOWN:
+                                if event.button == 1:
+                                    posicion = pygame.mouse.get_pos()
+                                    for c in Tablero.tablero:
+                                        if c.Contenido is not None:
+                                            posi = c.r.collidepoint(posicion)
+                                            Habilidades.escabullirse(casillaOrig, posicion)
+                                            pygame.display.update()
+    elif tokenUnidad.Nombre == "tucan":
+        print("vuelo rapido")
+    elif tokenUnidad.Nombre == "leon":
+        print("rugido")
 
 # Divido la anchura y altura de screen para asignarle el alto y ancho a la carta
 carta_Mostrada_W = int(screenX/5.5)

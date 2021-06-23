@@ -1,6 +1,7 @@
 import pygame
 
 import Tablero
+import Casilla
 
 class Token:
     cartaAsignada = None
@@ -23,6 +24,11 @@ class Token:
             pos_Tok_X , pos_Tok_Y = casilla.pos
             for i in range (self.Movimiento):
                 pygame.draw.rect(screen, (0,127,0), Tablero.tablero_Hash[(pos_Tok_X + i,pos_Tok_Y + i)].r)
+    #def efecto():
 
-    def efecto():
-        pass
+     #   pass
+
+    #def escabullirse(self, lista, posicion_token1, posicion_token2):
+     #   posicion_token1 = main.tokenSeleccionado
+      #  posicion_token2 = main.tokenSeleccionado2
+       # lista[posicion_token1], lista[posicion_token2] = lista[posicion_token2], lista[posicion_token1]
