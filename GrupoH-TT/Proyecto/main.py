@@ -59,9 +59,8 @@ tokenSeleccionado = False
 # Loop de juego
 UnidadesEnJuego = []
 running = True
-jugador1 = Jugador(1, mazoPolar)
-jugador1.roboInicial()
-jugador2 = Jugador(2,mazoPolar)
+jugador1 = Jugador(1,mazoPolar)
+jugador2 = Jugador(2,mazoSelva)
 
 
 # Metodos
@@ -199,6 +198,7 @@ def jugarCarta(carta):
                                 jugador1.mano.remove(carta)
                                 main.cartaSeleccionada = False
                                 Esperar = False
+                                envia_orden_crear(carta.token.Nombre,posicionDestino)
                                 #envio de info al otro jugador (id accion),(datos token)
                                 jugador1.puntosDeAccion[0] -= 1
                                 if jugador1.puntosDeAccion[0] == 0:
@@ -284,6 +284,7 @@ def MoverToken(casillaOrig):
                                         main.tokenSeleccionado = False
                                         c.Contenido = casillaOrig.Contenido
                                         casillaOrig.Contenido = None
+                                        envia_orden_mover(posicion,posicionDestino)
                                         jugador1.puntosDeAccion[0] -= 1
                                         #envio de info a otro jugador (id accion),(casilla origen, casilla destino)
                                         if jugador1.puntosDeAccion[0] == 0:
@@ -302,6 +303,21 @@ def MoverToken(casillaOrig):
                                 esperar = False
 
                     esperar = False
+
+def envia_orden_mover(pos_origen,pos_destino):
+    orden = "3 "+str(pos_origen[0])+" "+str(pos_origen[1])+" "+str(pos_destino[0])+" "+str(pos_destino[1])
+    conexion.send(orden.encode('itf-8'))
+    pass
+
+def envia_orden_crear(tipo,pos_destino):
+    orden = "2 "+tipo+" "+str(pos_destino[0])+" "+str(pos_destino[1])
+    conexion.send(orden.encode('itf-8'))
+    pass
+
+def envia_orden_reestablecer():
+    orden = "1"
+    conexion.send(orden.encode('itf-8'))
+    pass
 
 def recibe_orden():
 
@@ -349,12 +365,14 @@ def recibe_orden():
         casilla_origen.Contenido = None
         print("muevo token y espero otra orden")
 
+
 # Divido la anchura y altura de screen para asignarle el alto y ancho a la carta
 carta_Mostrada_W = int(screenX / 5.5)
 carta_Mostrada_H = int(screenY / 2.5)
 carta_Mostrada = pygame.image.load("Imagenes/ImgCartas/Carta_Negra.png")
 
 while running:
+    FPS_CLOCK.tick(FPS)
     screen.fill((0, 0, 0))
     screen.blit(map, ((screenX / 2) - (mapX / 2), (screenY / 2) - (mapY / 2)))
     # Transformo escalando la carta para que sea responsive a la dimension de la pantalla

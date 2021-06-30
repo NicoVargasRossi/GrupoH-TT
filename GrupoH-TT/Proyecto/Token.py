@@ -34,9 +34,9 @@ def crea_token(tipo):
     elif tipo == "gaviota":
         return Token("gaviota", pygame.image.load("Imagenes/LogosAnimales/gaviota.png"), 4,"",10, ["Normal","Agua","Bosque"], None)
     elif tipo == "zorro":
-        return Token("zorro blanco", pygame.image.load("Imagenes/LogosAnimales/zorro-artico.png"), 4, "",10,["Normal","Bosque"], None)
+        return Token("zorro", pygame.image.load("Imagenes/LogosAnimales/zorro-artico.png"), 4, "",10,["Normal","Bosque"], None)
     elif tipo == "pinguino":
-        return  Token("pungüino", pygame.image.load("Imagenes/LogosAnimales/pinguino.png"), 3,"",10, ["Normal","Agua"], None)
+        return  Token("punguino", pygame.image.load("Imagenes/LogosAnimales/pinguino.png"), 3,"",10, ["Normal","Agua"], None)
     elif tipo == "reno":
         return Token("reno", pygame.image.load("Imagenes/LogosAnimales/reno.png"), 3,"",10, ["Normal"], None)
     elif tipo == "leon":

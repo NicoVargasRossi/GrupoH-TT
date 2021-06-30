@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="279f1f0f-f844-4fbb-9416-da41787bd2a9" name="Default Changelist" comment="Avanzo en loop ppal">
+      <change beforePath="$PROJECT_DIR$/.idea/GrupoH-TT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GrupoH-TT.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/Jugador.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/Jugador.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/Token.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/Token.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/cliente.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +30,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/GrupoH-TT/Proyecto/main.py" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectId" id="1szXgtyOn1JtVm0WYDbV39DqaT4" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -35,7 +44,28 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.cliente">
+    <configuration name="cliente" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="GrupoH-TT" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/GrupoH-TT/Proyecto" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GrupoH-TT/Proyecto/cliente.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="GrupoH-TT" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -59,6 +89,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.cliente" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
